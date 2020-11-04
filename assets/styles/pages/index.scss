@@ -1,0 +1,70 @@
+@import '~assets/styles/include-media';
+@import '~assets/styles/variables';
+#home-page {
+    background: white;
+}
+
+#hero {
+    height: calc(var(--viewport-height) - #{$navbar-height});
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100vw;
+    .hero-text {
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 4.5rem;
+        text-align: center;
+        white-space: initial;
+        @include media('<=desktop') {
+            font-size: 3.5rem;
+        }
+        @include media ('<=tablet') {
+            font-size: 3rem;
+        }
+        @include media ('<=700px') {
+            font-size: 2.5rem;
+        }
+        @include media ('<=425px') {
+            font-size: 2rem;
+        }
+        @include media ('<=375px') {
+            font-size: 1.5rem;
+        }
+        >*:nth-child(2) {
+            font-weight: 500;
+        }
+    }
+    .hero-wine-splash-image-container {
+        position: absolute;
+        width: 100vw;
+        overflow-x: hidden;
+        bottom: -15rem;
+        --left: 1.5rem;
+        --factor: 2;
+        .hero-wine-splash-image {
+            width: calc(100vw + calc(var(--left) * var(--factor)));
+        }
+        @include media('<=desktop') {
+            bottom: -12rem;
+        }
+        @include media ('<=tablet') {
+            bottom: -10rem;
+            --factor: 10;
+        }
+        @include media ('<=700px') {
+            --factor: 15;
+        }
+        @include media ('<=500px') {
+            --left: 3rem;
+            --factor: 12;
+        }
+        @include media ('<=425px') {
+            --factor: 15;
+        }
+    }
+}

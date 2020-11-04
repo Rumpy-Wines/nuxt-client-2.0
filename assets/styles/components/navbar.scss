@@ -1,6 +1,7 @@
 @import '~assets/styles/variables';
 @import '~assets/styles/include-media';
 #navbar {
+    z-index: 10;
     position: sticky;
     top: 0;
     height: $navbar-height;

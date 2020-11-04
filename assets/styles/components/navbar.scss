@@ -1,0 +1,15 @@
+@import '~assets/styles/variables';
+#navbar {
+    height: $navbar-height;
+    background: white;
+    box-shadow: 0px 1px 4px rgba($dark, 0.08);
+    --padding: 1rem;
+    padding: var(--padding);
+    .brand {
+        height: 100%;
+        .logo {
+            background-image: url('/icon.png');
+            height: 100%;
+        }
+    }
+}

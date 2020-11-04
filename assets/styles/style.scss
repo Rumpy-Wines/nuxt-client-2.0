@@ -34,3 +34,10 @@ html {
     box-sizing: border-box;
     margin: 0;
 }
+
+button,
+button:active,
+button:focus {
+    outline: none;
+    cursor: pointer;
+}

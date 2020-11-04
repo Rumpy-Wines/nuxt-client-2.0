@@ -9,11 +9,23 @@
       <img class="hero-wine-splash-image" src="~/assets/images/hero-wine-splash.png" alt="" srcset="">
     </div>
   </section>
-  Overflowing content
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae commodi quam, minus repellat dolorem laborum blanditiis incidunt nobis dignissimos in voluptatem, illo, ducimus earum odit quo maxime fugiat ipsam obcaecati impedit nostrum itaque. Dolore, sit distinctio! Id aliquid quo consequatur deleniti voluptatem officia ad sunt veniam reprehenderit explicabo, debitis fuga cupiditate earum sapiente distinctio impedit dolorum architecto nesciunt facere aperiam. Ex cupiditate, inventore quia, veritatis molestiae consequuntur sit suscipit facere labore voluptate fuga culpa voluptatum ullam dolorem odit, dolorum accusantium ut placeat nisi impedit necessitatibus numquam sed officiis. Aliquam facere voluptatem nisi laborum, voluptatibus consequatur excepturi expedita porro reprehenderit tempora.</p>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae commodi quam, minus repellat dolorem laborum blanditiis incidunt nobis dignissimos in voluptatem, illo, ducimus earum odit quo maxime fugiat ipsam obcaecati impedit nostrum itaque. Dolore, sit distinctio! Id aliquid quo consequatur deleniti voluptatem officia ad sunt veniam reprehenderit explicabo, debitis fuga cupiditate earum sapiente distinctio impedit dolorum architecto nesciunt facere aperiam. Ex cupiditate, inventore quia, veritatis molestiae consequuntur sit suscipit facere labore voluptate fuga culpa voluptatum ullam dolorem odit, dolorum accusantium ut placeat nisi impedit necessitatibus numquam sed officiis. Aliquam facere voluptatem nisi laborum, voluptatibus consequatur excepturi expedita porro reprehenderit tempora.</p>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae commodi quam, minus repellat dolorem laborum blanditiis incidunt nobis dignissimos in voluptatem, illo, ducimus earum odit quo maxime fugiat ipsam obcaecati impedit nostrum itaque. Dolore, sit distinctio! Id aliquid quo consequatur deleniti voluptatem officia ad sunt veniam reprehenderit explicabo, debitis fuga cupiditate earum sapiente distinctio impedit dolorum architecto nesciunt facere aperiam. Ex cupiditate, inventore quia, veritatis molestiae consequuntur sit suscipit facere labore voluptate fuga culpa voluptatum ullam dolorem odit, dolorum accusantium ut placeat nisi impedit necessitatibus numquam sed officiis. Aliquam facere voluptatem nisi laborum, voluptatibus consequatur excepturi expedita porro reprehenderit tempora.</p>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae commodi quam, minus repellat dolorem laborum blanditiis incidunt nobis dignissimos in voluptatem, illo, ducimus earum odit quo maxime fugiat ipsam obcaecati impedit nostrum itaque. Dolore, sit distinctio! Id aliquid quo consequatur deleniti voluptatem officia ad sunt veniam reprehenderit explicabo, debitis fuga cupiditate earum sapiente distinctio impedit dolorum architecto nesciunt facere aperiam. Ex cupiditate, inventore quia, veritatis molestiae consequuntur sit suscipit facere labore voluptate fuga culpa voluptatum ullam dolorem odit, dolorum accusantium ut placeat nisi impedit necessitatibus numquam sed officiis. Aliquam facere voluptatem nisi laborum, voluptatibus consequatur excepturi expedita porro reprehenderit tempora.</p>
+  <section id="section-1" class="first-set-section">
+    <div class="right">
+      <div>
+        <h2 class="h2 header">Made from the finest of grapefriuts.</h2>
+        <p class="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+        <button class="action-button">See product gallery</button>
+      </div>
+    </div>
+    <div class="left">
+      <div class="image-container">
+        <div class="image"></div>
+      </div>
+    </div>
+  </section>
+  <section>
+
+  </section>
 </div>
 </template>
 

@@ -1,15 +1,129 @@
 @import '~assets/styles/variables';
+@import '~assets/styles/include-media';
 #navbar {
     height: $navbar-height;
     background: white;
     box-shadow: 0px 1px 4px rgba($dark, 0.08);
     --padding: 1rem;
-    padding: var(--padding);
+    padding-left: var(--padding);
+    padding-right: var(--padding);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &.collapsed {
+        &::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(black, 0.2);
+        }
+    }
     .brand {
         height: 100%;
+        display: flex;
+        align-items: center;
+        text-transform: uppercase;
         .logo {
             background-image: url('/icon.png');
+            height: calc(100% - var(--padding));
+            width: calc(#{$navbar-height} - 1.5rem);
+            height: calc(#{$navbar-height} - 1.5rem);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center right;
+            margin-right: 0.5rem;
+        }
+        .logo-text {
+            >*:first-child {
+                font-weight: 500;
+            }
+            >*:nth-child(2) {
+                font-weight: 300;
+                color: $accent-1;
+            }
+        }
+    }
+    .hamburger-container {
+        display: none;
+        padding: 0.5rem;
+        padding-right: 0.1rem;
+        cursor: pointer;
+        @include media('<=tablet') {
+            display: flex;
+        }
+    }
+    .nav-links-container {
+        height: 100%;
+        display: flex;
+        @include media('<=tablet') {
+            background: white;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: $navbar-tablet-width;
+            box-shadow: 0px 1px 4px rgba($dark, 0.08);
+            flex-direction: column;
+            display: none;
+            &.collapsed {
+                display: flex;
+            }
+        }
+        .close-button-container {
+            height: calc(#{$navbar-tablet-link-height} * 1.5);
+            display: flex;
+            display: none;
+            justify-content: flex-end;
+            border-bottom: 1px solid rgba($dark, 0.2);
+            @include media ('<=tablet') {
+                display: flex;
+            }
+            .close-button {
+                padding: 1rem;
+                font-size: 1.5rem;
+                cursor: pointer;
+                color: rgba($dark, 0.8);
+            }
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
             height: 100%;
+            @include media('<=tablet') {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+            }
+            .nav-link {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                font-size: 0.8rem;
+                text-transform: uppercase;
+                margin-right: 1rem;
+                cursor: pointer;
+                @include media('<=tablet') {
+                    height: $navbar-tablet-link-height;
+                    border-bottom: 1px solid rgba($dark, 0.2);
+                    margin-right: 0;
+                    width: 100%;
+                }
+                &:last-child {
+                    margin-right: 0;
+                }
+                &.active,
+                &:hover {
+                    color: $accent-1;
+                }
+                .icon {
+                    margin-right: 0.5rem;
+                }
+            }
         }
     }
 }

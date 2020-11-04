@@ -1,4 +1,8 @@
 export default {
+    server: {
+        host: '0.0.0.0',
+        port: '4000'
+    },
     // Global page headers (https://go.nuxtjs.dev/config-head)
     head: {
         title: 'rumpy',
@@ -8,8 +12,10 @@ export default {
             { hid: 'description', name: 'description', content: '' }
         ],
         link: [
-            { rel: 'icon', type: 'image/png', href: '/icon.png' }
-        ]
+            { rel: 'icon', type: 'image/png', href: '/icon.png' },
+            { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css' },
+        ],
+        script: []
     },
 
     // Global CSS (https://go.nuxtjs.dev/config-css)

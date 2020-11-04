@@ -1,34 +1,191 @@
 <template>
-<div id="home-page">
-  <section id="hero">
-    <div class="hero-text">
-      <span>I make wine disappear</span>
-      <span>What's your superpower?</span>
-    </div>
-    <div class="hero-wine-splash-image-container">
-      <img class="hero-wine-splash-image" src="~/assets/images/hero-wine-splash.png" alt="" srcset="">
-    </div>
-  </section>
-  <section id="section-1" class="first-set-section">
-    <div class="right">
-      <div>
-        <h2 class="h2 header">Made from the finest of grapefriuts.</h2>
-        <p class="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
-        <button class="action-button">See product gallery</button>
+  <div id="home-page">
+    <section id="hero">
+      <div class="hero-text">
+        <span
+          >I make wine disappear</span
+        >
+        <span>What's your superpower?</span>
       </div>
-    </div>
-    <div class="left">
-      <div class="image-container">
-        <div class="image"></div>
+      <div class="hero-wine-splash-image-container">
+        <img
+          class="hero-wine-splash-image"
+          src="~/assets/images/hero-wine-splash.png"
+          alt=""
+          srcset=""
+        />
       </div>
-    </div>
-  </section>
-  <section>
-
-  </section>
-</div>
+    </section>
+    <section id="section-1" class="first-set-section">
+      <div class="right">
+        <div>
+          <h2 class="h2 header">Made from the finest of grapefriuts.</h2>
+          <p class="paragraph">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat
+          </p>
+          <button class="action-button">See product gallery</button>
+        </div>
+      </div>
+      <div class="left">
+        <div class="image-container">
+          <div class="image"></div>
+        </div>
+      </div>
+    </section>
+    <section id="section-2" class="first-set-section">
+      <div class="right">
+        <div>
+          <h2 class="h2 header">It’s a thing to share with loved ones..</h2>
+          <p class="paragraph">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat
+          </p>
+          <button class="action-button">Perfect wines for dates</button>
+        </div>
+      </div>
+      <div class="left">
+        <div class="image-container">
+          <div class="image" :style="{backgroundImage:'url(\'/images/section-2-home-image.png\')'}" ></div>
+        </div>
+      </div>
+    </section>
+    <section id="section-3" class="first-set-section">
+      <div class="right">
+        <div>
+          <h2 class="h2 header">It’s a thing to share with loved ones..</h2>
+          <p class="paragraph">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat
+          </p>
+          <button class="action-button">Perfect wines for dates</button>
+        </div>
+      </div>
+      <div class="left">
+        <div class="image-container">
+          <div class="image" :style="{backgroundImage:'url(\'/images/section-3-home-image.png\')'}" ></div>
+        </div>
+      </div>
+    </section>
+    <section id="white-wine-section" class="wines-section-home-page">
+      <div class="left">
+        <div class="image-container">
+          <div class="image"></div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="right-content">
+          <h2 class="h2 header">
+            <span class="emphasis">White </span>
+            <span>wines</span>
+          </h2>
+          <p class="paragraph">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+          </p>
+          <button class="action-button">Browse wines</button>
+        </div>
+        </div>
+    </section>
+    <section id="red-wine-section" class="wines-section-home-page right">
+      <div class="left">
+        <div class="image-container">
+          <div class="image" style="background-image: url('/images/red-wines.jpg')"></div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="right-content">
+          <h2 class="h2 header">
+            <span class="emphasis">Red </span>
+            <span>wines</span>
+          </h2>
+          <p class="paragraph">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+          </p>
+          <button class="action-button">Browse wines</button>
+        </div>
+        </div>
+    </section>
+    <section id="rose-wine-section" class="wines-section-home-page">
+      <div class="left">
+        <div class="image-container">
+          <div class="image" style="background-image: url('/images/rose-wines.png')"></div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="right-content">
+          <h2 class="h2 header">
+            <span class="emphasis">Rosé </span>
+            <span>wines</span>
+          </h2>
+          <p class="paragraph">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+          </p>
+          <button class="action-button">Browse wines</button>
+        </div>
+        </div>
+    </section>
+    <section id="sparkling-wine-section" class="wines-section-home-page right">
+      <div class="left">
+        <div class="image-container">
+          <div class="image" style="background-image: url('/images/sparkling-wines.png')"></div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="right-content">
+          <h2 class="h2 header">
+            <span class="emphasis">Sparkling </span>
+            <span>wines</span>
+          </h2>
+          <p class="paragraph">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+          </p>
+          <button class="action-button">Browse wines</button>
+        </div>
+        </div>
+    </section>
+  </div>
 </template>
 
+<script>
+import Vue from "vue";
+
+export default {
+  methods: {
+    setupLax() {
+      this.$lax.setup();
+
+      document.addEventListener(
+        "scroll",
+        function (x) {
+          this.$lax.update(window.scrollY);
+        },
+        false
+      );
+      window.requestAnimationFrame(this.UpdateLax);
+    },
+    UpdateLax() {
+      this.$lax.update(window.scrollY);
+      window.requestAnimationFrame(this.UpdateLax);
+    },
+  },
+  mounted() {
+    this.setupLax();
+    this.$nextTick(() => {
+      this.$lax.addElement(this.$el);
+    });
+  },
+  created() {
+    // setup lax
+  },
+};
+</script>
+
 <style lang="scss" scoped>
-@import '~assets/styles/pages/index';
+@import "~assets/styles/pages/index";
 </style>

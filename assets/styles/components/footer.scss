@@ -1,0 +1,43 @@
+@import '~assets/styles/variables';
+#footer {
+    background: $dark;
+    color: $back-color;
+    font-weight: 300;
+    .content {
+        padding: 1rem 2rem;
+        .brand {
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            .accent {
+                color: $accent-1;
+            }
+            .logo-icon {
+                height: 40px;
+                width: 40px;
+                background: url('/icon.png');
+                background-size: contain;
+                background-position: center center;
+                background-repeat: no-repeat;
+                margin-right: 0.5rem;
+            }
+        }
+    }
+    .nav-links-container {
+        font-size: 0.8rem;
+        .nav-link {
+            padding-top: 0.2rem;
+            padding-bottom: 0.2rem;
+            cursor: pointer;
+        }
+    }
+    .footer-footer {
+        height: 50px;
+        background: black;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

@@ -88,7 +88,7 @@
           <p class="paragraph">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
           </p>
-          <button class="action-button">Browse wines</button>
+          <button class="action-button" @click="goToPage('/products/white-wine')">Browse wines</button>
         </div>
         </div>
     </section>
@@ -107,7 +107,7 @@
           <p class="paragraph">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
           </p>
-          <button class="action-button">Browse wines</button>
+          <button class="action-button" @click="goToPage('/products/red-wine')">Browse wines</button>
         </div>
         </div>
     </section>
@@ -126,7 +126,7 @@
           <p class="paragraph">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
           </p>
-          <button class="action-button">Browse wines</button>
+          <button class="action-button" @click="goToPage('/products/rose-wine')">Browse wines</button>
         </div>
         </div>
     </section>
@@ -145,7 +145,7 @@
           <p class="paragraph">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
           </p>
-          <button class="action-button">Browse wines</button>
+          <button class="action-button" @click="goToPage('/products/sparkling-wine')">Browse wines</button>
         </div>
         </div>
     </section>

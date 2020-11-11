@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="nav-links">
-        <div class="nav-link" @click="goToPage('/products')" :class="{active: $nuxt.$route.path == '/products'}">
+        <div class="nav-link" @click="goToPage('/products')" :class="{active: $nuxt.$route.path.startsWith('/products')}">
           <i class="icon fas fa-store"></i> Product
         </div>
         <div class="nav-link">

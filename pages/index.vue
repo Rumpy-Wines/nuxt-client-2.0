@@ -1,7 +1,7 @@
 <template>
   <div id="home-page">
     <section id="hero">
-      <div class="hero-text rellax">
+      <div class="hero-text">
         <span
           >I make wine disappear</span
         >
@@ -153,36 +153,11 @@
 </template>
 
 <script>
-import Rellax from 'rellax';
 
 export default {
-  methods: {
-    setupLax() {
-      this.$lax.setup();
-
-      document.addEventListener(
-        "scroll",
-        function (x) {
-          this.$lax.update(window.scrollY);
-        },
-        false
-      );
-      window.requestAnimationFrame(this.UpdateLax);
-    },
-    UpdateLax() {
-      this.$lax.update(window.scrollY);
-      window.requestAnimationFrame(this.UpdateLax);
-    },
-  },
   mounted() {
-    // this.setupLax();
-    // this.$nextTick(() => {
-    //   this.$lax.addElement(this.$el);
-    // });
-    let rellax = new Rellax('.rellax')
   },
   created() {
-    // setup lax
   },
 };
 </script>

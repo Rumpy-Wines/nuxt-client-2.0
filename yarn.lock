@@ -4961,11 +4961,6 @@ launch-editor@^2.2.1:
     chalk "^2.3.0"
     shell-quote "^1.6.1"
 
-lax.js@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/lax.js/-/lax.js-1.2.5.tgz#cf4279be9f604a0bb20fd3e808af97879c246c3d"
-  integrity sha512-Ytf7ZUhn2YLtyYoUFT8KpoRYvzw0awTr66J0vrp4NpwPaXPp504yhvsrqtP6ZDny3/Y7UOQsWHylV9iLl3cuoQ==
-
 lines-and-columns@^1.1.6:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
@@ -6910,11 +6905,6 @@ relateurl@^0.2.7:
   version "0.2.7"
   resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
   integrity sha1-VNvzd+UUQKypCkzSdGANP/LYiKk=
-
-rellax@^1.12.1:
-  version "1.12.1"
-  resolved "https://registry.yarnpkg.com/rellax/-/rellax-1.12.1.tgz#1b433ef7ac4aa3573449a33efab391c112f6b34d"
-  integrity sha512-XBIi0CDpW5FLTujYjYBn1CIbK2CJL6TsAg/w409KghP2LucjjzBjsujXDAjyBLWgsfupfUcL5WzdnIPcGfK7XA==
 
 remove-trailing-separator@^1.0.1:
   version "1.1.0"

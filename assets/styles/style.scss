@@ -37,7 +37,13 @@ html {
 
 button,
 button:active,
-button:focus {
+button:focus,
+input,
+input:focus,
+input:active,
+textarea,
+textarea:focus,
+textarea:active {
     outline: none;
     cursor: pointer;
 }

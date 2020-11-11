@@ -26,7 +26,7 @@
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
             aliquip ex ea commodo consequat
           </p>
-          <button class="action-button">See product gallery</button>
+          <button class="action-button" @click="goToPage('/products')">See product gallery</button>
         </div>
       </div>
       <div class="left">
@@ -45,7 +45,7 @@
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
             aliquip ex ea commodo consequat
           </p>
-          <button class="action-button">Perfect wines for dates</button>
+          <button class="action-button" @click="goToPage('/products')">Perfect wines for dates</button>
         </div>
       </div>
       <div class="left">
@@ -64,7 +64,7 @@
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
             aliquip ex ea commodo consequat
           </p>
-          <button class="action-button">Perfect wines for dates</button>
+          <button class="action-button" @click="goToPage('/products')">Perfect wines for dates</button>
         </div>
       </div>
       <div class="left">
@@ -155,10 +155,13 @@
 <script>
 
 export default {
-  mounted() {
-  },
-  created() {
-  },
+  methods: {
+    goToPage(path) {
+      if(this.$nuxt.$route.fullPath == path) return
+
+      this.$nuxt.$router.push(path)
+    }
+  }
 };
 </script>
 

@@ -1,0 +1,50 @@
+@import '~assets/styles/include-media';
+@import '~assets/styles/variables';
+.products-header-section {
+    height: calc(var(--viewport-height) * 0.6);
+    background-image: url('/images/wine-gallery-header-image.png');
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    @include media('<=425px') {
+        height: calc(var(--viewport-height) * 0.4);
+    }
+    .header-text {
+        position: absolute;
+        bottom: 20%;
+        left: 2rem;
+        color: white;
+        display: inline-block;
+        .text {
+            font-weight: normal;
+            font-size: 3rem;
+            display: inline;
+            text-shadow: 0px 4px 15px #000000;
+            @include media('<=425px') {
+                font-size: 2rem;
+            }
+        }
+        .header-underline {
+            width: 80%;
+            height: 3px;
+            background: white;
+            box-shadow: 0px 4px 15px #000000;
+            @include media('<=425px') {
+                height: 2px;
+            }
+        }
+    }
+}
+
+.products-showcase-section {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+    row-gap: 2rem;
+    @include media('<=tablet') {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        row-gap: 1rem;
+    }
+}

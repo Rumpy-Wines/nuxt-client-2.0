@@ -135,7 +135,7 @@
         // padding-left: 2rem;
         height: 100%;
         @include media('<=425px') {
-            height: 10rem;
+            height: 20rem;
             width: 100%;
         }
         .image-container {

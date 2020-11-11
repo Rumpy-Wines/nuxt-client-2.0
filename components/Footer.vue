@@ -18,9 +18,6 @@
 				<i class="icon fas fa-user-alt"></i> Account
 				</div>
 				<div class="nav-link">
-				<i class="icon fas fa-sign-in-alt"></i> Login
-				</div>
-				<div class="nav-link">
 				<i class="icon fas fa-cart-arrow-down"></i> Cart
 				</div>		
 			</div>

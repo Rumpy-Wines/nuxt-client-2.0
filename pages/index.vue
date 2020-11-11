@@ -1,7 +1,7 @@
 <template>
   <div id="home-page">
     <section id="hero">
-      <div class="hero-text">
+      <div class="hero-text rellax">
         <span
           >I make wine disappear</span
         >
@@ -153,7 +153,7 @@
 </template>
 
 <script>
-import Vue from "vue";
+import Rellax from 'rellax';
 
 export default {
   methods: {
@@ -175,10 +175,11 @@ export default {
     },
   },
   mounted() {
-    this.setupLax();
-    this.$nextTick(() => {
-      this.$lax.addElement(this.$el);
-    });
+    // this.setupLax();
+    // this.$nextTick(() => {
+    //   this.$lax.addElement(this.$el);
+    // });
+    let rellax = new Rellax('.rellax')
   },
   created() {
     // setup lax

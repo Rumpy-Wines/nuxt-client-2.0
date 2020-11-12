@@ -1,0 +1,244 @@
+@import '~assets/styles/include-media';
+@import '~assets/styles/variables';
+#single-product-page {
+    --text-size: 0.9rem;
+    >* {
+        background: white;
+        box-shadow: 0px 4px 10px rgba($dark, 0.15);
+        margin-bottom: 1.5rem;
+        padding: 2rem;
+        overflow: hidden;
+        width: 100%;
+        @include media('<=425px') {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+         :last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.product-brief {
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    @include media ('<=tablet') {
+        grid-template-columns: 12rem 1fr;
+        gap: 1rem;
+    }
+    @include media ('<=600px') {
+        grid-template-columns: 8rem 1fr;
+        gap: 0.5rem;
+    }
+    @include media ('<=375px') {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    .right {
+        @include media ('<=375px') {
+            height: 15rem;
+        }
+        .image {
+            // background: red;
+            height: 100%;
+            width: 100%;
+            padding: 0.5rem;
+            background-image: url('/images/product-wine-example.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: contain;
+            background-origin: content-box;
+        }
+    }
+    .left {
+        width: 100%;
+        padding: 0.5rem;
+        .text {
+            .name {
+                font-size: 1.5rem;
+                @include media ('<=tablet') {
+                    font-size: 1.2rem;
+                }
+                @include media ('<=phone') {
+                    font-size: 1rem;
+                }
+            }
+            .year {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+                @include media ('<=tablet') {
+                    font-size: 0.9rem;
+                    margin-bottom: 1.2rem;
+                }
+                @include media ('<=phone') {
+                    font-size: 0.8rem;
+                    margin-bottom: 1rem;
+                }
+            }
+            .address {
+                font-size: 1rem;
+                margin-bottom: 1.2rem;
+                @include media ('<=tablet') {
+                    font-size: 0.9rem;
+                    margin-bottom: 1rem;
+                }
+                @include media ('<=phone') {
+                    font-size: 0.8rem;
+                    margin-bottom: 0.8rem;
+                }
+            }
+            .rating-container {
+                font-size: 0.9rem;
+                display: inline-flex;
+                align-items: center;
+                margin-bottom: 1.2rem;
+                color: rgba($dark, 0.77);
+                @include media ('<=tablet') {
+                    font-size: 0.8rem;
+                    margin-bottom: 1rem;
+                }
+                @include media ('<=phone') {
+                    font-size: 0.75rem;
+                    margin-bottom: 0.8rem;
+                }
+                .rating-box {
+                    border: solid 1px $accent-1;
+                    padding: 0 0.2rem;
+                    margin-right: 0.5rem;
+                    .icon {
+                        color: $accent-1;
+                    }
+                }
+            }
+            .alcohol-content {
+                font-size: 0.9rem;
+                margin-bottom: 1.2rem;
+                @include media ('<=tablet') {
+                    font-size: 0.8rem;
+                    margin-bottom: 1rem;
+                }
+                @include media ('<=phone') {
+                    font-size: 0.75rem;
+                    margin-bottom: 0.8rem;
+                }
+            }
+            .price {
+                font-weight: 600;
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+                @include media ('<=tablet') {
+                    font-size: 1rem;
+                    margin-bottom: 1rem;
+                }
+                @include media ('<=phone') {
+                    font-size: 0.8rem;
+                    margin-bottom: 0.8rem;
+                }
+            }
+            .action-button-container {
+                .button {
+                    height: 30px;
+                    padding-left: 0.5rem;
+                    padding-right: 0.5rem;
+                    border-radius: 3px;
+                    border: none;
+                    color: white;
+                    margin-right: 0.5rem;
+                    margin-bottom: 0.2rem;
+                    box-shadow: 1px 1px 5px 2px rgba($dark, 0.2);
+                    &.buy-now {
+                        background: $accent-1;
+                    }
+                    &.add-to-cart {
+                        background: $dark;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.other-info {
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    grid-gap: 1rem;
+    @include media ('<=tablet') {
+        grid-template-columns: 1fr 1fr;
+    }
+    @include media ('<=600px') {
+        grid-template-columns: 1fr;
+    }
+    .manufacturers-description {
+        font-size: var(--text-size);
+        order: 1;
+        @include media ('<=600px') {
+            order: unset;
+            margin-bottom: 2rem;
+        }
+    }
+    .info {
+        >* {
+            margin-bottom: 2rem;
+            &:last-child {
+                margin-bottom: 0;
+            }
+            .body {
+                font-size: var(--text-size);
+            }
+        }
+        .quick-info {
+            .body {
+                .questions-responses {
+                    display: grid;
+                    grid-template-columns: auto auto 1fr;
+                    gap: 1.5rem;
+                    .divider {
+                        width: 1px;
+                        background: rgba($dark, 0.41);
+                    }
+                    .questions .question,
+                    .responses .response {
+                        margin-bottom: 0.3rem;
+                    }
+                }
+            }
+        }
+    }
+    .wine-tags {
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            .tag {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.7rem;
+                margin-right: 0.5rem;
+                margin-bottom: 0.2rem;
+                background: rgba($dark, 0.1);
+                border: solid 1px rgba($dark, 0.29);
+                border-radius: 5px;
+                padding: 0.15rem 0.3rem;
+                font-weight: 500;
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}
+
+.product-suggestions {
+    box-shadow: none !important;
+    background: transparent !important;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    @include media('<=tablet') {
+        grid-template-columns: 1fr;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+}

@@ -1,8 +1,8 @@
 <template>
   <div class="gallery-product">
-	  <div class="image"></div>
+	  <div class="image" @click="goToPage('/products/id')"></div>
 	  <div class="text">
-		  <div class="name">Bonny doon von cigare de greece.</div>
+		  <div class="name" @click="goToPage('/products/id')">Bonny doon von cigare de greece.</div>
 		  <div class="year">1998</div>
 		  <div class="address">Rosé from Cotes de provence south, France</div>
 		  <div class="rating-container">
@@ -22,9 +22,18 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import {Vue, Component, Prop} from "vue-property-decorator"
 
+@Component({})
+export default class GalleryProduct extends Vue {
+	goToPage(path : string) {
+		event?.preventDefault()
+
+		if(this.$nuxt.$route.fullPath == path) return
+
+		this.$nuxt.$router.push(path)
+	}
 }
 </script>
 

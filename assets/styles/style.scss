@@ -47,3 +47,29 @@ textarea:active {
     outline: none;
     cursor: pointer;
 }
+
+// For page transition animation
+.page-enter-active,
+.page-leave-active {
+    transition: opacity 0.1s;
+}
+
+.page-enter,
+.page-leave-to {
+    opacity: 0;
+}
+
+//Headings
+.mini-heading {
+    font-weight: 500;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    .underline {
+        display: inline-block;
+        height: 1px;
+        width: 4.5rem;
+        background: $dark;
+    }
+}

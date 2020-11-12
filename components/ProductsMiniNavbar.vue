@@ -1,13 +1,13 @@
 <template>
   <div id="products-mini-navbar">
-    <div>
+    <!-- <div>
       <div class="search form-group">
         <div class="icon">
           <i class="fas fa-search"></i>
         </div>
         <input class="input" type="text" placeholder="search wine..." />
       </div>
-    </div>
+    </div> -->
     <div class="group-2">
       <div class="navs">
         <div class="nav" @click="goToPage('/products')" :class="{active: $nuxt.$route.path == '/products'}">All Wines</div>
@@ -16,10 +16,10 @@
         <div class="nav" @click="goToPage('/products/rose-wine')" :class="{active: $nuxt.$route.path == '/products/rose-wine'}">Rosé Wine</div>
         <div class="nav" @click="goToPage('/products/sparkling-wine')" :class="{active: $nuxt.$route.path == '/products/sparkling-wine'}">Sparkling Wine</div>
       </div>
-      <button class="filter-button">
+      <!-- <button class="filter-button">
         <i class="fas fa-filter"></i>
         <span>Filter</span>
-      </button>
+      </button> -->
     </div>
   </div>
 </template>

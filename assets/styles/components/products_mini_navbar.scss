@@ -1,3 +1,4 @@
+@import '~assets/styles/include-media';
 @import '~assets/styles/variables';
 #products-mini-navbar {
     background: white;
@@ -6,13 +7,17 @@
     height: $products-mini-navbar-height;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    // justify-content: space-between;
+    justify-content: center;
     padding-left: 1rem;
     padding-right: 1rem;
     z-index: 9;
     border-top: solid 0.5px rgba(31, 48, 64, 0.05);
     filter: drop-shadow(0px 2px 4px rgba(31, 48, 64, 0.05));
     --action-components-height: 28px;
+    @include media('<=425px') {
+        padding: 0;
+    }
     .form-group.search {
         display: flex;
         align-items: center;
@@ -42,13 +47,21 @@
         height: 100%;
         display: flex;
         align-items: center;
+        @include media('<=425px') {
+            padding: 0;
+            width: 100%;
+        }
         .navs {
             display: flex;
             align-items: center;
             padding-top: 0.2rem;
             padding-bottom: 0.2rem;
             height: 100%;
-            margin-right: 1rem;
+            // margin-right: 1rem;
+            @include media('<=425px') {
+                padding: 0.1rem 0;
+                width: 100%;
+            }
             .nav {
                 height: 100%;
                 display: flex;
@@ -66,6 +79,11 @@
                 &.active {
                     color: $accent-1;
                     border-color: $accent-1;
+                }
+                @include media('<=425px') {
+                    flex: 1;
+                    font-size: 0.7rem;
+                    padding: 0 0.5rem;
                 }
             }
         }

@@ -1,0 +1,26 @@
+@import '~assets/styles/variables';
+.light-cards-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    .account-email {
+        margin-bottom: 1rem;
+    }
+    .questions-responses {
+        display: grid;
+        grid-template-columns: auto auto 1fr;
+        gap: 1rem;
+        font-size: 0.75rem;
+        .divider {
+            width: 1px;
+            background: rgba($dark, 0.64);
+        }
+        .questions {
+            color: $dark;
+        }
+        .questions .question,
+        .responses .response {
+            margin-bottom: 0.3rem;
+        }
+    }
+}

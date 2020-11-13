@@ -18,13 +18,23 @@
         </div>
       </div>
       <div class="nav-links">
-        <div class="nav-link" @click="goToPage('/products')" :class="{active: $nuxt.$route.path.startsWith('/products')}">
+        <div
+          class="nav-link"
+          @click="goToPage('/products')"
+          :class="{ active: $nuxt.$route.path.startsWith('/products') }"
+        >
           <i class="icon fas fa-store"></i> Product
         </div>
         <div class="nav-link">
           <i class="icon fas fa-hands-helping"></i> Help Center
         </div>
-        <div class="nav-link"><i class="icon fas fa-user-alt"></i> Account</div>
+        <div
+          class="nav-link"
+          @click="goToPage('/account')"
+          :class="{ active: $nuxt.$route.path.startsWith('/account') }"
+        >
+          <i class="icon fas fa-user-alt"></i> Account
+        </div>
         <div class="nav-link">
           <i class="icon fas fa-sign-in-alt"></i> Login
         </div>
@@ -54,12 +64,12 @@ export default {
     },
   },
   watch: {
-	  $route(to, from){
-		  if(to.path != from.path){
-			  this.collapsed = false
-		  }
-	  }
-  }
+    $route(to, from) {
+      if (to.path != from.path) {
+        this.collapsed = false;
+      }
+    },
+  },
 };
 </script>
 

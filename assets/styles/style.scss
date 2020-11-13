@@ -46,6 +46,7 @@ textarea:focus,
 textarea:active {
     outline: none;
     cursor: pointer;
+    color: $dark;
 }
 
 // For page transition animation
@@ -66,6 +67,12 @@ textarea:active {
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
+    &.heading-light {
+        font-weight: 400;
+        .underline {
+            background: rgba($dark, 0.8);
+        }
+    }
     .underline {
         display: inline-block;
         height: 1px;

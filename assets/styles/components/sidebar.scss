@@ -1,0 +1,30 @@
+@import '~assets/styles/variables';
+#sidebar {
+    box-shadow: 0px 4px 10px rgba($dark, 0.15);
+    border-radius: 5px;
+    background: white;
+    font-size: 0.8rem;
+    width: 17rem;
+    .navs {
+        .nav {
+            text-transform: uppercase;
+            display: grid;
+            grid-template-columns: 1.5rem 1fr;
+            align-items: center;
+            border-bottom: 1px solid rgba($dark, 0.3);
+            height: $sidebar-nav-element-height;
+            padding-left: 0.8rem;
+            padding-right: 0.8rem;
+            cursor: pointer;
+            &:hover,
+            &.active {
+                color: $accent-1;
+                background: rgba($accent-3, 0.15);
+            }
+            &.logout,
+            &.logout:hover {
+                color: $danger-red;
+            }
+        }
+    }
+}

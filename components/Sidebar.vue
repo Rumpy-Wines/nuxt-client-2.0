@@ -10,10 +10,10 @@
 		  <div class="nav" :class="{active: $nuxt.$route.path == '/account/address-book'}" @click="goToPage('/account/address-book')">
 			  <i class="fas fa-book"></i><span class="text">Address Book</span>
 		  </div>
-		  <div class="nav">
+		  <div class="nav" :class="{active: $nuxt.$route.path == '/account/orders'}" @click="goToPage('/account/orders')">
 			  <i class="fas fa-dolly"></i><span class="text">Orders</span>
 		  </div>
-		  <div class="nav">
+		  <div class="nav" :class="{active: $nuxt.$route.path == '/account/change-password'}" @click="goToPage('/account/change-password')">
 			  <i class="fas fa-user-lock"></i><span class="text">Change Password</span>
 		  </div>
 		  <div class="nav logout">

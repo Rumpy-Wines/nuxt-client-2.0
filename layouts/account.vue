@@ -28,14 +28,14 @@ export default {
 
 	#account-layout-content {
 		height: calc(var(--viewport-height) - #{$navbar-height});
-		padding: 1rem 2rem;
+		padding: 0.5rem 2rem;
 		display: grid;
 		grid-template-columns: auto 1fr;
 		gap: 1rem;
 		overflow: hidden;
 
 		@include media('<=desktop') {
-			padding: 1rem;
+			padding: 0.5rem 1rem;
 		}
 
 		@include media('<=tablet'){

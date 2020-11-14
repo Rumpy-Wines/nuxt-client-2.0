@@ -60,9 +60,10 @@ export default class Modal extends Vue {
 
 <style lang="scss">
 @import "~assets/styles/variables";
+@import "~assets/styles/include-media";
 @keyframes display-modal {
   from {
-    clip-path: circle(10%);
+    clip-path: circle(0%);
   }
   to {
     clip-path: circle(100%);
@@ -73,10 +74,11 @@ export default class Modal extends Vue {
     clip-path: circle(100%);
   }
   to {
-    clip-path: circle(10%);
+    clip-path: circle(0%);
   }
 }
 .modal {
+  --animation-duration: 0.5s;
   position: fixed;
   top: 0;
   left: 0;
@@ -90,11 +92,11 @@ export default class Modal extends Vue {
   align-items: center;
   justify-content: center;
   --modal-padding: 2rem;
-  padding: var(--modal-padding);
-  animation-duration: 0.5s;
+  padding: var(--modal-padding) 0;
+  animation-duration: var(--animation-duration);
   animation-name: display-modal;
   &.closing {
-    animation-duration: 0.5s;
+    animation-duration: var(--animation-duration);
     animation-name: close-modal;
   }
   .content {
@@ -107,6 +109,14 @@ export default class Modal extends Vue {
     border-radius: 5px;
     display: flex;
     flex-direction: column;
+    @include media('<=tablet') {
+      min-width: 80%;
+      max-width: 90%;
+    }
+    @include media('<=425px') {
+      min-width: 90%;
+      max-width: calc(100% - 2rem);
+    }
     .header {
       position: relative;
       .close-button-container {

@@ -1,8 +1,15 @@
 @import '~assets/styles/variables';
+@import '~assets/styles/include-media';
 .light-cards-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
+    @include media('<=tablet') {
+        gap: 1rem;
+    }
+    @include media('<=600px') {
+        grid-template-columns: 1fr;
+    }
     .account-email {
         margin-bottom: 1rem;
     }

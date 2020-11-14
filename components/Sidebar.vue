@@ -1,5 +1,8 @@
 <template>
-  <div id="sidebar">
+  <div id="sidebar" :class="{collapsed: collapsed}" ref="sidebar">
+	  <div ref="listIcon" class="list-icon" @click="collapsed = false">
+		  <i class="fas fa-list-ul"></i>
+	  </div>
 	  <div class="navs">
 		  <div class="nav active">
 			  <i class="fas fa-user-alt"></i><span class="text">Profile</span>
@@ -23,8 +26,27 @@
 <script lang="ts">
 import {Vue, Component, Prop} from "vue-property-decorator";
 
-@Component({})
+@Component({
+	
+})
 export default class Sidebar extends Vue {
+	collapsed : boolean = true;
+
+	documentTouchStartEventListener(event: any) {
+		let eventPath = event.path
+		let sidebar : HTMLElement = this.$refs.sidebar as HTMLElement
+		let listIcon : HTMLElement = this.$refs.listIcon as HTMLElement
+
+		if(eventPath.some((el : HTMLElement) => el == listIcon || el == sidebar)) return
+
+		this.collapsed = true
+	}
+
+	mounted() {
+		console.log("Mounted")
+		document.addEventListener('touchstart', this.documentTouchStartEventListener)
+		document.addEventListener('click', this.documentTouchStartEventListener)
+	}
 }
 </script>
 

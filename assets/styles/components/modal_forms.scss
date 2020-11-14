@@ -1,4 +1,5 @@
 @import '~assets/styles/variables';
+@import '~assets/styles/include-media';
 .form {
     margin-top: 1.5rem;
     .divider {
@@ -12,6 +13,12 @@
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
         row-gap: 1rem;
+        @include media('<=tablet') {
+            gap: 1rem;
+        }
+        @include media('<=425px') {
+            grid-template-columns: 1fr;
+        }
         .input-group {
             display: flex;
             flex-direction: column;

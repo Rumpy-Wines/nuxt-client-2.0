@@ -24,6 +24,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~assets/styles/variables';
+@import '~assets/styles/include-media';
 
 	#account-layout-content {
 		height: calc(var(--viewport-height) - #{$navbar-height});
@@ -32,6 +33,19 @@ export default {
 		grid-template-columns: auto 1fr;
 		gap: 1rem;
 		overflow: hidden;
+
+		@include media('<=desktop') {
+			padding: 1rem;
+		}
+
+		@include media('<=tablet'){
+			grid-template-columns: 1fr;
+			overflow: unset;
+			height: unset;
+		}
+		@include media('<=600px') {
+			padding: 0.5rem;
+		}
 	}
 	
 	#page-container {

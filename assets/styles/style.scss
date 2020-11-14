@@ -41,12 +41,21 @@ button:focus,
 input,
 input:focus,
 input:active,
+select,
+select:focus,
+select:active,
 textarea,
 textarea:focus,
 textarea:active {
     outline: none;
     cursor: pointer;
     color: $dark;
+}
+
+select {
+    option[value=""][disabled] {
+        display: none;
+    }
 }
 
 // For page transition animation
@@ -78,5 +87,28 @@ textarea:active {
         height: 1px;
         width: 4.5rem;
         background: $dark;
+    }
+}
+
+// Texts
+.text-muted {
+    color: rgba($dark, 0.62);
+}
+
+//Landmarks
+.landmarks {
+    display: flex;
+    flex-wrap: wrap;
+    .landmark {
+        margin-right: 0.2rem;
+        margin-bottom: 0.2rem;
+        font-size: 0.7rem;
+        color: rgba($dark, 0.94);
+        background: rgba($dark, 0.19);
+        padding: 0 0.5rem;
+        border-radius: 5px;
+        .delete-button {
+            cursor: pointer;
+        }
     }
 }

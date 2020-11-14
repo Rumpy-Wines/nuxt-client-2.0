@@ -20,7 +20,7 @@
 				  </div>
 				  <div class="divider"></div>
 				  <div class="form-group">
-					  <div class="input-group email">
+					  <div class="input-group span-2">
 						  <label for="" class="label">Email Address</label>
 						  <input type="email" class="form-control" placeholder="janedoe@examplemail.com">
 					  </div>
@@ -62,56 +62,5 @@ export default class EditProfileDetailsModal extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/styles/variables';
-.form {
-	margin-top: 1.5rem;
-	.divider {
-		height: 1px;
-		background: rgba($dark, 0.29);
-		margin-top: 2rem;
-		margin-bottom: 2rem;
-	}
-	.form-group {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 2rem;
-		row-gap: 1rem;
-		.input-group {
-			display: flex;
-			flex-direction: column;
-
-			&.email {
-				grid-column: 1 / span 2;
-			}
-			.label {
-				font-size: 0.8rem;
-			}
-			.form-control {
-				width: 100%;
-				height: 35px;
-				background: $back-color;
-				border: 1px solid rgba($dark, 0.39);
-				border-radius: 3px;
-				font-size: 0.8rem;
-				padding-left: 0.5rem;
-				padding-right: 0.5rem;
-				&::placeholder {
-					color: #A0A6AD;
-				}
-			}
-		}
-	}
-
-	.actions-container {
-		margin-top: 2rem;
-		.submit-button {
-			background: $accent-1;
-			color: white;
-			border: none;
-			border-radius: 3px;
-			font-size: 1rem;
-			padding: 0.5rem 1rem;
-		}
-	}
-}
+@import '~assets/styles/components/modal_forms';
 </style>

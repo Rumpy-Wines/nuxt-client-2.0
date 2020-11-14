@@ -1,6 +1,9 @@
 <template>
   <div>
-    <edit-profile-details-modal v-if="showEditProfileDetialsModal" @modal-close="showEditProfileDetialsModal = false"/>
+    <edit-profile-details-modal
+      v-if="showEditProfileDetialsModal"
+      @modal-close="showEditProfileDetialsModal = false"
+    />
     <div class="mini-heading heading-light">
       <span>Account Overview</span>
       <div class="underline"></div>
@@ -27,12 +30,20 @@
           </div>
         </div>
       </light-card>
-      <light-card>
+      <light-card @icon-clicked="goToPage('account/address-book')">
         <template v-slot:header-text>Address Book</template>
         <template v-slot:icon><i class="fas fa-pencil-alt"></i></template>
         <template v-slot:body-header-text>Home Address</template>
         white gold guest house, 8, rail road line, budo giwa, Ilorin Ilorin -
         Gaaakanbi-Asadam-Ganmo, Kwara +234 8094183083
+
+        <div class="landmarks-container">
+          <div class="landmarks">
+            <div class="landmark">Roemich International School</div>
+            <div class="landmark">White Gold Guest House</div>
+            <div class="landmark">Redeem Church</div>
+          </div>
+        </div>
       </light-card>
     </div>
   </div>
@@ -48,8 +59,13 @@ import EditProfileDetailsModal from "~/components/EditProfileDetailsModal.vue";
   layout: "account",
 })
 export default class Account extends Vue {
-	showEditProfileDetialsModal : boolean = false;
+  showEditProfileDetialsModal: boolean = false;
 
+  goToPage(path: string) {
+    if (this.$nuxt.$route.fullPath == path) return;
+
+    this.$nuxt.$router.push(path);
+  }
 }
 </script>
 

@@ -33,4 +33,21 @@
     .landmarks-container {
         margin-top: 1rem;
     }
+    .status-container {
+        margin-top: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.7rem;
+        color: $success-green;
+        >* {
+            cursor: pointer;
+        }
+        .active {
+            color: $accent-1;
+            cursor: inherit;
+        }
+        .remove-button {
+            color: $danger-red;
+        }
+    }
 }

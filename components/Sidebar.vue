@@ -4,10 +4,10 @@
 		  <i class="fas fa-list-ul"></i>
 	  </div>
 	  <div class="navs">
-		  <div class="nav active">
+		  <div class="nav" :class="{active: $nuxt.$route.path == '/account'}" @click="goToPage('/account')">
 			  <i class="fas fa-user-alt"></i><span class="text">Profile</span>
 		  </div>
-		  <div class="nav">
+		  <div class="nav" :class="{active: $nuxt.$route.path == '/account/address-book'}" @click="goToPage('/account/address-book')">
 			  <i class="fas fa-book"></i><span class="text">Address Book</span>
 		  </div>
 		  <div class="nav">
@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from "vue-property-decorator";
+import {Vue, Component, Prop, Watch} from "vue-property-decorator";
 
 @Component({
 	
@@ -46,6 +46,18 @@ export default class Sidebar extends Vue {
 		console.log("Mounted")
 		document.addEventListener('touchstart', this.documentTouchStartEventListener)
 		document.addEventListener('click', this.documentTouchStartEventListener)
+	}
+
+	goToPage(path: string) {
+	  if (this.$nuxt.$route.fullPath == path) return;
+      this.$nuxt.$router.push(path);
+	}
+	
+	@Watch('$route')
+	totalChanged(to: any, from : any) {
+		if(to.fullPath == from.fullPath) return
+
+		this.collapsed = true
 	}
 }
 </script>

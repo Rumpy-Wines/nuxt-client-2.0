@@ -1,8 +1,8 @@
 export default {
-    server: {
-        host: '0.0.0.0',
-        port: '4000'
-    },
+    // server: {
+    //     host: '0.0.0.0',
+    //     port: '4000'
+    // },
     // Global page headers (https://go.nuxtjs.dev/config-head)
     head: {
         title: 'rumpy',

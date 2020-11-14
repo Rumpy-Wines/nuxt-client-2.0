@@ -68,7 +68,7 @@ export default class AddressBook extends Vue {
 
 .add-address-button-container {
   padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
   display: flex;
   justify-content: center;
   .add-address-button {

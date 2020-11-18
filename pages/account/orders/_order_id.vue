@@ -47,11 +47,16 @@ import OrderItem from "~/components/OrderItem.vue";
 })
 export default class SingleOrderPage extends Vue {
   copyID() {
-    let text = `davex-adasdadsfadsfadsfa`
-    navigator.clipboard.writeText(text)
-      .then(() => {
-        alert("text copied: " + text)
-      })
+    let text = `davex-adasdadsfadsfadsfa`;
+    navigator.clipboard.writeText(text).then(() => {
+      // @ts-ignore
+      this.$toast.open({
+        message: "Copied!",
+        type: "info",
+        duration: 2000
+        // all of other options may go here
+      });
+    });
   }
   
   goToPage(path: string) {

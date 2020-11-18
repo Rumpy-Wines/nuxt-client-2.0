@@ -76,6 +76,13 @@ select {
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    .text {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 100%;
+        overflow: hidden;
+    }
     &.heading-light {
         font-weight: 400;
         .underline {
@@ -87,6 +94,38 @@ select {
         height: 1px;
         width: 4.5rem;
         background: $dark;
+    }
+}
+
+.questions-responses {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 1rem;
+    font-size: 0.75rem;
+    .divider {
+        width: 1px !important;
+        height: 100% !important;
+        background: rgba($dark, 0.5) !important;
+    }
+    .questions {
+        color: $dark;
+    }
+    .questions .question,
+    .responses .response {
+        margin-bottom: 0.3rem;
+    }
+    .responses {
+        color: rgba($dark, 0.67);
+    }
+}
+
+.divider {
+    height: 1px;
+    width: 100%;
+    background: rgba($dark, 0.5);
+    &.vertical {
+        width: 1px;
+        height: 100%;
     }
 }
 
@@ -110,5 +149,23 @@ select {
         .delete-button {
             cursor: pointer;
         }
+    }
+}
+
+//Tags
+.tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 300;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+    &.tag-success {
+        background: $success-green;
+        color: white;
+    }
+    &.tag-progress {
+        background: #F2F246;
+        color: $dark;
+        border: rgba($dark, 0.3) solid 0.5px;
     }
 }

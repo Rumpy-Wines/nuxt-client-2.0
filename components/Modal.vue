@@ -4,7 +4,7 @@
       <div class="header">
         <div class="header-text">
           <div class="mini-heading heading-light">
-            <span>
+            <span class="text">
               <slot name="modal-header-text"> Modal Header </slot>
             </span>
             <div class="underline"></div>

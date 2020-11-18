@@ -1,7 +1,7 @@
 <template>
 	<div>
     <div class="mini-heading heading-light">
-      <span>Orders</span>
+      <span class="text">Orders</span>
       <div class="underline"></div>
     </div>
     <div class="orders-container">
@@ -27,5 +27,5 @@ export default class OrdersPage extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-@import '~assets/styles/pages/account/orders';
+@import '~assets/styles/pages/account/orders/index';
 </style>

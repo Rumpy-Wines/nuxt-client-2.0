@@ -30,7 +30,7 @@
       <section class="other-info">
         <div class="manufacturers-description">
           <div class="mini-heading">
-            <span>Manufacturer's Description</span>
+            <span class="text">Manufacturer's Description</span>
             <div class="underline"></div>
           </div>
           <div class="body">
@@ -48,7 +48,7 @@
         <div class="info">
           <div class="quick-info">
             <div class="mini-heading">
-              <span>Quick Info</span>
+              <span class="text">Quick Info</span>
               <div class="underline"></div>
             </div>
             <div class="body">
@@ -73,7 +73,7 @@
           </div>
           <div class="wine-tags">
             <div class="mini-heading">
-              <span>Wine Tags</span>
+              <span class="text">Wine Tags</span>
               <div class="underline"></div>
             </div>
             <div class="body">
@@ -94,7 +94,7 @@
 
     <section class="reviews">
       <div class="mini-heading">
-        <span>Reviews</span>
+        <span class="text">Reviews</span>
         <div class="underline"></div>
       </div>
       <div class="reviews-container">

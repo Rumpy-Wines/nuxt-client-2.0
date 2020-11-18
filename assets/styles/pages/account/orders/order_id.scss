@@ -1,0 +1,28 @@
+@import '~assets/styles/include-media';
+#single-order-page {
+    .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        .back-icon {
+            margin-right: 0.6rem;
+            cursor: pointer;
+        }
+        .mini-heading {
+            margin-bottom: 0;
+        }
+    }
+    .order-brief {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .order-items-container {
+        margin-top: 1.5rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        @include media('<=tablet') {
+            grid-template-columns: 1fr;
+        }
+    }
+}

@@ -1,7 +1,7 @@
 <template>
   <div id="change-password-page">
     <div class="mini-heading heading-light">
-      <span>Change Password</span>
+      <span class="text">Change Password</span>
       <div class="underline"></div>
     </div>
     <div class="form-container">

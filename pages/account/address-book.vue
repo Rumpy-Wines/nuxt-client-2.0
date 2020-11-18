@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="mini-heading heading-light">
-      <span>Address Book</span>
+      <span class="text">Address Book</span>
       <div class="underline"></div>
     </div>
     <create-edit-address-modal

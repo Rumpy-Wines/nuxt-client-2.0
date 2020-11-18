@@ -5,7 +5,7 @@
       @modal-close="showEditProfileDetialsModal = false"
     />
     <div class="mini-heading heading-light">
-      <span>Account Overview</span>
+      <span class="text">Account Overview</span>
       <div class="underline"></div>
     </div>
     <div class="light-cards-container">

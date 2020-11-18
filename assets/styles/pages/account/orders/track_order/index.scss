@@ -1,0 +1,164 @@
+@import '~assets/styles/include-media';
+@import '~assets/styles/variables';
+#track-order-page {
+    .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        .back-icon {
+            margin-right: 0.6rem;
+            cursor: pointer;
+        }
+        .mini-heading {
+            margin-bottom: 0;
+        }
+    }
+    .order-brief {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .item-details {
+        display: grid;
+        grid-template-columns: 15rem 1fr;
+        gap: 2rem;
+        margin-top: 1.5rem;
+        margin-bottom: 2.5rem;
+        @include media ('<=tablet') {
+            grid-template-columns: 10rem 1fr;
+            gap: 1rem;
+        }
+        @include media('<=425px') {
+            grid-template-columns: 7rem 1fr;
+            gap: 0.5rem;
+        }
+        .image-container {
+            .image {
+                height: 100%;
+                width: 100%;
+                background-image: url('/images/product-wine-example.png');
+                background-position: center center;
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+        }
+        .content {
+            .name {
+                font-size: 1.2rem;
+                @include media('<=425px') {
+                    font-size: 1rem;
+                }
+            }
+            .year {
+                margin-bottom: 1rem;
+                @include media('<=425px') {
+                    font-size: 0.8rem;
+                    margin-bottom: 0.8rem;
+                }
+            }
+            .address {
+                font-size: 0.9rem;
+                margin-bottom: 2rem;
+                @include media('<=425px') {
+                    font-size: 0.75rem;
+                    margin-bottom: 1.2rem;
+                }
+            }
+            .alcohol-content {
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
+                @include media('<=425px') {
+                    font-size: 0.75rem;
+                    margin-bottom: 1rem;
+                }
+            }
+            .rating-container {
+                display: flex;
+                align-items: center;
+                font-size: 0.8rem;
+                color: rgba($dark, 0.77);
+                margin-bottom: 1rem;
+                @include media('<=425px') {
+                    font-size: 0.75rem;
+                    margin-bottom: 0.8rem;
+                }
+                .rating-box {
+                    border: 0.5px solid $accent-1;
+                    margin-right: 0.5rem;
+                    padding: 0.1rem 0.1rem;
+                    .icon {
+                        color: $accent-1;
+                    }
+                }
+            }
+            .price {
+                @include media('<=425px') {
+                    font-size: 0.9rem;
+                }
+                .total {
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+    .locations {
+        margin-top: 2.5rem;
+        margin-bottom: 1.5rem;
+        .location {
+            --location-spacing: 2rem;
+            display: grid;
+            grid-template-columns: 3rem 1fr;
+            gap: 1rem;
+            margin-bottom: var(--location-spacing);
+            &:last-child {
+                margin-bottom: 0;
+                .track {
+                    &::before {
+                        display: none !important;
+                    }
+                }
+            }
+            .track {
+                display: flex;
+                justify-content: center;
+                position: relative;
+                --circle-size: 1.2rem;
+                .circle {
+                    height: var(--circle-size);
+                    width: var(--circle-size);
+                    background: $success-green;
+                    border-radius: 50%;
+                    border: solid 2px $dark;
+                    z-index: 2;
+                }
+                &.not-active {
+                    .circle {
+                        background: white;
+                    }
+                }
+                &::before {
+                    content: '';
+                    position: absolute;
+                    width: 2px;
+                    height: calc(100% + var(--location-spacing));
+                    top: calc(var(--circle-size) / 2);
+                    left: calc(50% - 1px);
+                    background: $dark;
+                }
+            }
+            .name {
+                font-weight: 500;
+                font-size: 0.9rem;
+                margin-bottom: 0.2rem;
+            }
+            .full-address {
+                font-size: 0.85rem;
+                color: rgba($dark, 0.53);
+                max-width: 20rem;
+                // font-weight: 500;
+                @include media('<=425px') {
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+}

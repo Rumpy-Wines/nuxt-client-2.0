@@ -9,14 +9,17 @@
       <div class="order-id">
         <span>Order ID: </span>
         <span class="id">davex-adsnfaiudskfaiusbfaidsufbadskv</span>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum error
-        nihil cum velit iure ad praesentium eos quisquam recusandae rem.
       </div>
       <div class="status-container">
         <div class="text">Status:</div>
         <div class="status-tag delivered">Delivered</div>
       </div>
-      <button class="view-details-button">View Details</button>
+      <button
+        class="view-details-button"
+        @click.prevent="goToPage(`/account/orders/afvadsfads`)"
+      >
+        View Details
+      </button>
     </div>
   </div>
 </template>
@@ -25,7 +28,14 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component
-export default class OrderDetail extends Vue {}
+export default class OrderDetail extends Vue {
+  goToPage(path: string) {
+    event?.preventDefault();
+    if (this.$nuxt.$route.fullPath == path) return;
+
+    this.$nuxt.$router.push(path);
+  }
+}
 </script>
 
 <style lang="scss" scoped>

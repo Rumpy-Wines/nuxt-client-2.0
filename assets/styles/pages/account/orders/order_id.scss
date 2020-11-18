@@ -1,4 +1,5 @@
 @import '~assets/styles/include-media';
+@import '~assets/styles/variables';
 #single-order-page {
     .header {
         display: flex;
@@ -15,6 +16,14 @@
     .order-brief {
         margin-top: 1.5rem;
         margin-bottom: 1.5rem;
+        .copy-button {
+            color: white;
+            border: none;
+            background: rgba($accent-1, 0.8);
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            margin-top: 1rem;
+        }
     }
     .order-items-container {
         margin-top: 1.5rem;

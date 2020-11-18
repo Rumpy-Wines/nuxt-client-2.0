@@ -24,6 +24,7 @@
           <div class="response">NGN 239,999</div>
         </div>
       </div>
+      <button class="copy-button" @click="copyID()"><i class="far fa-copy"></i> <span>Copy Order ID</span></button>
     </div>
 
     <div class="divider"></div>
@@ -45,6 +46,14 @@ import OrderItem from "~/components/OrderItem.vue";
   layout: "account",
 })
 export default class SingleOrderPage extends Vue {
+  copyID() {
+    let text = `davex-adasdadsfadsfadsfa`
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        alert("text copied: " + text)
+      })
+  }
+  
   goToPage(path: string) {
     if(path == this.$nuxt.$route.fullPath) return
     this.$nuxt.$router.push(path)

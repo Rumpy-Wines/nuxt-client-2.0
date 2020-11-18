@@ -24,6 +24,9 @@
           <div class="response">NGN 239,999</div>
         </div>
       </div>
+      <button class="copy-button" @click="copyID()">
+        <i class="far fa-copy"></i> <span>Copy Order Item ID</span>
+      </button>
     </div>
 
     <div class="divider"></div>
@@ -51,7 +54,7 @@
     <div class="divider"></div>
     <div class="locations">
       <div class="location" v-for="i in 5" :key="i">
-        <div class="track" :class="{'not-active': i>=3}">
+        <div class="track" :class="{ 'not-active': i >= 3 }">
           <div class="circle"></div>
         </div>
         <div class="content">
@@ -72,7 +75,20 @@ import { Vue, Component, Prop } from "nuxt-property-decorator";
 @Component({
   layout: "account",
 })
-export default class TrackSingleOrderPage extends Vue {}
+export default class TrackSingleOrderPage extends Vue {
+  copyID() {
+    let text = `davex-adasdadsfadsfadsfa`;
+    navigator.clipboard.writeText(text).then(() => {
+      // @ts-ignore
+      this.$toast.open({
+        message: "Copied!",
+        type: "info",
+        duration: 2000
+        // all of other options may go here
+      });
+    });
+  }
+}
 </script>
 
 <style lang="scss" scoped>

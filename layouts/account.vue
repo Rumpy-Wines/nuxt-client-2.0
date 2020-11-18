@@ -53,10 +53,11 @@ export default {
 		border-radius: 5px;
 		box-shadow: 0px 4px 10px rgba($dark, 0.15);
 		padding: 1rem;
+		// width: 100%;
 		overflow: hidden;
 		overflow-y: auto;
 		@include media('<=tablet'){
-			overflow: unset;
+			// overflow: unset;
 		}
 	}
 </style>

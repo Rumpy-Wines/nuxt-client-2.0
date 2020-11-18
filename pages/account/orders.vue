@@ -1,10 +1,21 @@
 <template>
-	<div>This is the orders page</div>
+	<div>
+    <div class="mini-heading heading-light">
+      <span>Orders</span>
+      <div class="underline"></div>
+    </div>
+    <div class="orders-container">
+      <order-detail v-for="i in 5" :key="i" />
+    </div>
+  </div>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
+import OrderDetail from '~/components/OrderDetail.vue';
+
 
 @Component({
+  components: { OrderDetail },
   layout: "account",
 })
 export default class OrdersPage extends Vue {
@@ -15,3 +26,6 @@ export default class OrdersPage extends Vue {
   }
 }
 </script>
+<style lang="scss" scoped>
+@import '~assets/styles/pages/account/orders';
+</style>

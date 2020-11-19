@@ -1,8 +1,18 @@
 <template>
   <div ref="navbar" id="navbar" :class="{ expanded: !collapsed }">
     <!-- Login Modal -->
-    <login-modal ref="loginModal" @go-to-register="goToRegister()" v-if="showLoginModal" @modal-close="showLoginModal = false" />
-    <register-modal ref="registerModal" @go-to-login="goToLogin()" v-if="showRegisterModal" @modal-close="showRegisterModal = false" />
+    <login-modal
+      ref="loginModal"
+      @go-to-register="goToRegister()"
+      v-if="showLoginModal"
+      @modal-close="showLoginModal = false"
+    />
+    <register-modal
+      ref="registerModal"
+      @go-to-login="goToLogin()"
+      v-if="showRegisterModal"
+      @modal-close="showRegisterModal = false"
+    />
     <div class="brand" @click="goToPage('/')">
       <div class="logo"></div>
       <div class="logo-text">
@@ -42,10 +52,14 @@
         >
           <i class="icon fas fa-user-alt"></i> Account
         </div>
-        <div class="nav-link"  @click="showRegisterModalFunction()">
+        <div class="nav-link" @click="showRegisterModalFunction()">
           <i class="icon fas fa-sign-in-alt"></i> Login / Register
         </div>
-        <div class="nav-link">
+        <div
+          class="nav-link"
+          :class="{ active: $nuxt.$route.path.startsWith('/cart') }"
+          @click="goToPage('/cart')"
+        >
           <i class="icon fas fa-cart-arrow-down"></i> Cart
         </div>
       </div>
@@ -57,46 +71,48 @@
 import { Vue, Component, Prop, Watch } from "nuxt-property-decorator";
 import LoginModal from "~/components/LoginModal.vue";
 import RegisterModal from "~/components/RegisterModal.vue";
-import Modal from '~/components/Modal.vue';
+import Modal from "~/components/Modal.vue";
 
 @Component({
-  components: {RegisterModal}
+  components: { RegisterModal },
 })
 export default class Navbar extends Vue {
   collapsed: boolean = true;
   showLoginModal: boolean = false;
   showRegisterModal: boolean = false;
 
-  runFunctionAfter(functionToRun: Function, delay: number){
+  runFunctionAfter(functionToRun: Function, delay: number) {
     setTimeout(functionToRun, delay);
   }
 
   goToRegister() {
-    let loginModal : LoginModal | undefined = this.$refs.loginModal as LoginModal | undefined
-    if(loginModal != undefined)
-      loginModal.close()
+    let loginModal: LoginModal | undefined = this.$refs.loginModal as
+      | LoginModal
+      | undefined;
+    if (loginModal != undefined) loginModal.close();
 
-    this.runFunctionAfter(this.showRegisterModalFunction, Modal.animationTime)
+    this.runFunctionAfter(this.showRegisterModalFunction, Modal.animationTime);
   }
 
   goToLogin() {
-    let registerModal : RegisterModal | undefined = this.$refs.registerModal as RegisterModal | undefined
-    if(registerModal != undefined)
-      registerModal.close()
-    this.runFunctionAfter(this.showLoginModalFunction, Modal.animationTime)
+    let registerModal: RegisterModal | undefined = this.$refs.registerModal as
+      | RegisterModal
+      | undefined;
+    if (registerModal != undefined) registerModal.close();
+    this.runFunctionAfter(this.showLoginModalFunction, Modal.animationTime);
   }
 
-  collapseNavbar(){
-    if(this.collapsed == false) this.collapsed = true
+  collapseNavbar() {
+    if (this.collapsed == false) this.collapsed = true;
   }
 
-  showRegisterModalFunction(){
-    this.collapseNavbar()
-    this.showRegisterModal = true
+  showRegisterModalFunction() {
+    this.collapseNavbar();
+    this.showRegisterModal = true;
   }
-  showLoginModalFunction(){
-    this.collapseNavbar()
-    this.showLoginModal = true
+  showLoginModalFunction() {
+    this.collapseNavbar();
+    this.showLoginModal = true;
   }
 
   documentTouchStartEventListener(event: any) {
@@ -104,16 +120,18 @@ export default class Navbar extends Vue {
     // debugger
     let navLinkContainer: HTMLElement = this.$refs
       .navLinkContainer as HTMLElement;
-    let navbar : HTMLElement = this.$refs.navbar as HTMLElement
+    let navbar: HTMLElement = this.$refs.navbar as HTMLElement;
 
-    let hambuger : HTMLElement = this.$refs.hambuger as HTMLElement
+    let hambuger: HTMLElement = this.$refs.hambuger as HTMLElement;
 
-    if(eventPath.some((el: HTMLElement) => el == hambuger)) return
+    if (eventPath.some((el: HTMLElement) => el == hambuger)) return;
 
-    if(!this.collapsed && !eventPath.some((el: HTMLElement) => el == navLinkContainer)){
-      this.collapsed = true
+    if (
+      !this.collapsed &&
+      !eventPath.some((el: HTMLElement) => el == navLinkContainer)
+    ) {
+      this.collapsed = true;
     }
-
   }
 
   mounted() {

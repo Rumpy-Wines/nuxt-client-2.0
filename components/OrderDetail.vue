@@ -38,6 +38,6 @@ export default class OrderDetail extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "~assets/styles/components/order_detail";
 </style>

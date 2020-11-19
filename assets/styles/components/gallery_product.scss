@@ -11,6 +11,7 @@
     display: grid;
     grid-template-columns: 10rem 1fr;
     gap: 1rem;
+    border-radius: 3px;
     @include media('<=425px') {
         grid-template-columns: 7rem 1fr;
     }

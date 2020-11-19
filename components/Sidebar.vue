@@ -62,6 +62,6 @@ export default class Sidebar extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~assets/styles/components/sidebar';
 </style>

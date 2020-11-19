@@ -16,7 +16,7 @@
     </p>
   </div>
 </template>
-<style lang="scss" scoped>
+<style lang="scss">
 @import "~assets/styles/variables";
 
 .review-box {

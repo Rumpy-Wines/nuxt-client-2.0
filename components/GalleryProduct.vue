@@ -37,6 +37,6 @@ export default class GalleryProduct extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~assets/styles/components/gallery_product';
 </style>

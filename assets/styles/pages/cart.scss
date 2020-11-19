@@ -1,0 +1,35 @@
+@import '~assets/styles/include-media';
+@import '~assets/styles/variables';
+#cart-page {
+    padding: 2rem;
+    @include media('<=desktop') {
+        padding: 1rem;
+    }
+    .cart-items-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        @include media('<=desktop') {
+            gap: 1rem;
+        }
+        @include media('<=tablet') {
+            grid-template-columns: 1fr;
+        }
+    }
+    .total-card {
+        background: white;
+        padding: 0.5rem 1rem;
+        box-shadow: 0px 4px 4px rgba($dark, 0.25);
+        .value {
+            font-weight: 500;
+        }
+    }
+    .checkout-button {
+        font-size: 1rem;
+        color: #F2F246;
+        background: black;
+        border: none;
+        padding: 0.6rem 1rem;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
+    }
+}

@@ -1,0 +1,28 @@
+//margin
+$spacing-base-value: 0.5rem;
+$spacing: (all: all, l: left, r: right, t: top, b: bottom);
+@mixin spacing-mixin {
+    @for $i from 1 through 10 {
+        @each $key,
+        $val in $spacing {
+            .m-#{$key}-#{$i} {
+                @if $key==all {
+                    margin: $spacing-base-value * $i;
+                }
+                @else {
+                    margin-#{$val}: $spacing-base-value * $i;
+                }
+            }
+            .p-#{$key}-#{$i} {
+                @if $key==all {
+                    padding: $spacing-base-value * $i;
+                }
+                @else {
+                    padding-#{$val}: $spacing-base-value * $i;
+                }
+            }
+        }
+    }
+}
+
+@include spacing-mixin;

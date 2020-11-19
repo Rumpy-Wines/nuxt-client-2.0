@@ -1,0 +1,31 @@
+.display-flex {
+    display: flex;
+    &.flex-wrap-wrap {
+        flex-wrap: wrap;
+    }
+}
+
+//Justify Content
+$justify-content-values: (c: center, sb: space-between, fs: flex-start, fe: flex-end);
+@mixin justify-content-mixin {
+    @each $key,
+    $val in $justify-content-values {
+        .justify-content-#{$key} {
+            justify-content: $val;
+        }
+    }
+}
+
+@include justify-content-mixin;
+//Align Items
+$align-items-values: (c: center, sb: space-between, fs: flex-start, fe: flex-end);
+@mixin align-items-mixin {
+    @each $key,
+    $val in $align-items-values {
+        .align-items-#{$key} {
+            align-items: $val;
+        }
+    }
+}
+
+@include align-items-mixin;

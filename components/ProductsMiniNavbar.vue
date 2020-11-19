@@ -36,6 +36,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "~assets/styles/components/products_mini_navbar";
 </style>

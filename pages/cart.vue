@@ -7,7 +7,7 @@
 			<div class="total-card ">Total: <span class="value">NGN 529,999</span></div>
 		</div>
 		<div class="checkout-button-container display-flex justify-content-fe m-t-2">
-			<button class="checkout-button">Proceed To Checkout</button>
+			<button class="checkout-button" @click="goToPage('/checkout')">Proceed To Checkout</button>
 		</div>
 	</div>
 </template>
@@ -22,7 +22,10 @@ import CartItem from '~/components/CartItem.vue';
 	}
 })
 export default class CartPage extends Vue{
-
+	goToPage(path: string){
+		if(path == this.$nuxt.$route.fullPath) return
+		this.$nuxt.$router.push(path)
+	}
 }
 </script>
 

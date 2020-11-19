@@ -1,0 +1,134 @@
+@import '~assets/styles/include-media';
+@import '~assets/styles/variables';
+@mixin blur-mixin($val) {
+    -webkit-filter: blur(#{$val});
+    -moz-filter: blur(#{$val});
+    -o-filter: blur(#{$val});
+    -ms-filter: blur(#{$val});
+    filter: blur(#{$val});
+}
+
+@keyframes not-active-animation {
+    from {
+        @include blur-mixin(0px);
+    }
+    to {
+        @include blur-mixin(5px);
+    }
+}
+
+#checkout-page--id {
+    padding: 1rem 2rem;
+    %actions-button {
+        color: white;
+        border: none;
+        border-radius: 3px;
+        padding: 0.5rem 0.8rem;
+        background: rgba($dark, 0.83);
+        margin-bottom: 0.5rem;
+    }
+    .continue-button {
+        @extend %actions-button;
+        background: $success-green;
+    }
+    .button {
+        @extend %actions-button;
+        margin-right: 0.5rem;
+    }
+    @include media('<=desktop') {
+        padding: 1rem;
+    }
+    .header {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+        font-weight: 500;
+    }
+    %checkout-sections {
+        background: white;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        position: relative;
+        &.not-active {
+            @include blur-mixin(5px);
+            animation-name: not-active-animation;
+            animation-duration: 0.3s;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    .account-setup {
+        @extend %checkout-sections;
+        .no-setup {
+            max-width: 30rem;
+            font-size: 0.9rem;
+            p {
+                margin-bottom: 0.5rem;
+            }
+        }
+    }
+    .items-summary {
+        @extend %checkout-sections;
+        .summary-items-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+            @include media('<=desktop') {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            @include media('<=tablet') {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            @include media('<=600px') {
+                grid-template-columns: 1fr;
+            }
+            .summary-item {
+                display: grid;
+                grid-template-columns: 5rem 1fr;
+                gap: 0.5rem;
+                padding: 1rem;
+                .image-container .image {
+                    height: 100%;
+                    width: 100%;
+                    background-image: url('/images/product-wine-example.png');
+                    background-size: contain;
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                }
+                .content {
+                    .name {
+                        font-size: 0.9rem;
+                    }
+                    .year {
+                        font-size: 0.75rem;
+                        margin-bottom: 0.8rem;
+                    }
+                    .total {
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+        .total-price {
+            font-weight: 500;
+        }
+    }
+    .shipping-address-container {
+        @extend %checkout-sections;
+        .light-card-container {
+            max-width: 30rem;
+            .landmarks-container {
+                margin-top: 1rem;
+            }
+        }
+        .change-address-select {
+            height: 30px;
+            border-radius: 3px;
+            background: white;
+            border: 1px solid $dark;
+            color: $dark;
+            margin-bottom: 0.5rem;
+        }
+    }
+}

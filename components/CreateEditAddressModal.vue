@@ -1,7 +1,7 @@
 <template>
   <div>
 	  <modal @modal-close="$emit('modal-close')">
-		  <template v-slot:modal-header-text>Edit Profile</template>
+		  <template v-slot:modal-header-text>Crate/Edit Address</template>
 		  <div>
 			  <form action="" class="form">
 				  <div class="form-group">

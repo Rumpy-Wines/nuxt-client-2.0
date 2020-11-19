@@ -43,6 +43,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class Modal extends Vue {
+  static animationTime: number = 500;
   close() {
     let modal: HTMLDivElement = this.$refs.modal as HTMLDivElement;
 

@@ -1,5 +1,11 @@
 @import '~assets/styles/variables';
 @import '~assets/styles/include-media';
+.form-container {
+    .other-actions {
+        margin-top: 1rem;
+    }
+}
+
 .form {
     margin-top: 1.5rem;
     .divider {

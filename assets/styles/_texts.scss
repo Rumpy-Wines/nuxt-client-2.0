@@ -1,0 +1,61 @@
+@import '~assets/styles/variables';
+$root-font-size: 100% !default;
+$sizes: 1rem,
+1.2rem,
+1.5rem,
+1.7rem,
+2.0rem,
+2.5rem,
+2.7rem,
+3.0rem,
+3.5rem,
+4.0rem !default;
+$sizes-negative: 0.95rem,
+0.9rem,
+0.85rem,
+0.8rem,
+0.75rem,
+0.7rem,
+0.65rem !default;
+@function size($i) {
+    @return nth($sizes, $i);
+}
+
+@function size-negative($i) {
+    @return nth($sizes-negative, $i);
+}
+
+// Goes between the base class name and the generated suffix
+$class-name-separator: "-" !default; // or "--" for BEM
+@mixin font-sizes {
+    // Generate the classes by iterating through the array
+    @for $i from 1 through length($sizes) {
+        &#{$class-name-separator}#{$i} {
+            font-size: size($i);
+        }
+    }
+}
+
+@mixin font-sizes-negative {
+    // Generate the classes by iterating through the array
+    @for $i from 1 through length($sizes-negative) {
+        &#{$class-name-separator}-#{$i} {
+            font-size: size-negative($i);
+        }
+    }
+}
+
+// Output the mixin's classes inside a wrapper class:
+.font-size {
+    @include font-sizes;
+    @include font-sizes-negative;
+}
+
+//TEXT Color
+.text-color-success {
+    color: $success-green;
+}
+
+.text-color-callout {
+    color: $callout-color;
+}

@@ -1,5 +1,8 @@
 <template>
   <div ref="navbar" id="navbar" :class="{ expanded: !collapsed }">
+    <!-- Login Modal -->
+    <login-modal ref="loginModal" @go-to-register="goToRegister()" v-if="showLoginModal" @modal-close="showLoginModal = false" />
+    <register-modal ref="registerModal" @go-to-login="goToLogin()" v-if="showRegisterModal" @modal-close="showRegisterModal = false" />
     <div class="brand" @click="goToPage('/')">
       <div class="logo"></div>
       <div class="logo-text">
@@ -39,8 +42,8 @@
         >
           <i class="icon fas fa-user-alt"></i> Account
         </div>
-        <div class="nav-link">
-          <i class="icon fas fa-sign-in-alt"></i> Login
+        <div class="nav-link"  @click="showRegisterModalFunction()">
+          <i class="icon fas fa-sign-in-alt"></i> Login / Register
         </div>
         <div class="nav-link">
           <i class="icon fas fa-cart-arrow-down"></i> Cart
@@ -52,10 +55,49 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from "nuxt-property-decorator";
+import LoginModal from "~/components/LoginModal.vue";
+import RegisterModal from "~/components/RegisterModal.vue";
+import Modal from '~/components/Modal.vue';
 
-@Component
+@Component({
+  components: {RegisterModal}
+})
 export default class Navbar extends Vue {
   collapsed: boolean = true;
+  showLoginModal: boolean = false;
+  showRegisterModal: boolean = false;
+
+  runFunctionAfter(functionToRun: Function, delay: number){
+    setTimeout(functionToRun, delay);
+  }
+
+  goToRegister() {
+    let loginModal : LoginModal | undefined = this.$refs.loginModal as LoginModal | undefined
+    if(loginModal != undefined)
+      loginModal.close()
+
+    this.runFunctionAfter(this.showRegisterModalFunction, Modal.animationTime)
+  }
+
+  goToLogin() {
+    let registerModal : RegisterModal | undefined = this.$refs.registerModal as RegisterModal | undefined
+    if(registerModal != undefined)
+      registerModal.close()
+    this.runFunctionAfter(this.showLoginModalFunction, Modal.animationTime)
+  }
+
+  collapseNavbar(){
+    if(this.collapsed == false) this.collapsed = true
+  }
+
+  showRegisterModalFunction(){
+    this.collapseNavbar()
+    this.showRegisterModal = true
+  }
+  showLoginModalFunction(){
+    this.collapseNavbar()
+    this.showLoginModal = true
+  }
 
   documentTouchStartEventListener(event: any) {
     let eventPath = event.path;

@@ -1,5 +1,5 @@
 <template>
-  <div id="navbar" :class="{ collapsed: collapsed }">
+  <div ref="navbar" id="navbar" :class="{ expanded: !collapsed }">
     <div class="brand" @click="goToPage('/')">
       <div class="logo"></div>
       <div class="logo-text">
@@ -7,11 +7,15 @@
         <span>wines</span>
       </div>
     </div>
-    <div class="hamburger-container" @click="toggleNavbar()">
+    <div ref="hambuger" class="hamburger-container" @click="toggleNavbar()">
       <i class="fas fa-bars"></i>
     </div>
     <!-- <div class="nav-links-container collapsed"> -->
-    <div class="nav-links-container" :class="{ collapsed: collapsed }">
+    <div
+      ref="navLinkContainer"
+      class="nav-links-container"
+      :class="{ expanded: !collapsed }"
+    >
       <div class="close-button-container">
         <div class="close-button" @click="toggleNavbar()">
           <i class="fas fa-times"></i>
@@ -46,31 +50,55 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      collapsed: false,
-    };
-  },
-  methods: {
-    toggleNavbar() {
-      this.collapsed = !this.collapsed;
-    },
-    goToPage(path) {
-      if (this.$nuxt.$route.fullPath == path) return;
+<script lang="ts">
+import { Vue, Component, Prop, Watch } from "nuxt-property-decorator";
 
-      this.$nuxt.$router.push(path);
-    },
-  },
-  watch: {
-    $route(to, from) {
-      if (to.path != from.path) {
-        this.collapsed = false;
-      }
-    },
-  },
-};
+@Component
+export default class Navbar extends Vue {
+  collapsed: boolean = true;
+
+  documentTouchStartEventListener(event: any) {
+    let eventPath = event.path;
+    // debugger
+    let navLinkContainer: HTMLElement = this.$refs
+      .navLinkContainer as HTMLElement;
+    let navbar : HTMLElement = this.$refs.navbar as HTMLElement
+
+    let hambuger : HTMLElement = this.$refs.hambuger as HTMLElement
+
+    if(eventPath.some((el: HTMLElement) => el == hambuger)) return
+
+    if(!this.collapsed && !eventPath.some((el: HTMLElement) => el == navLinkContainer)){
+      this.collapsed = true
+    }
+
+  }
+
+  mounted() {
+    console.log("Mounted");
+    document.addEventListener(
+      "touchstart",
+      this.documentTouchStartEventListener
+    );
+    document.addEventListener("click", this.documentTouchStartEventListener);
+  }
+
+  toggleNavbar() {
+    this.collapsed = !this.collapsed;
+  }
+  goToPage(path: string) {
+    if (this.$nuxt.$route.fullPath == path) return;
+
+    this.$nuxt.$router.push(path);
+  }
+
+  @Watch("$route")
+  routeWatcher(to: any, from: any) {
+    if (to.path != from.path) {
+      this.collapsed = true;
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

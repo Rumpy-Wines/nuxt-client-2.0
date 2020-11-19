@@ -1,7 +1,7 @@
 @import '~assets/styles/include-media';
 @import '~assets/styles/variables';
 #cart-page {
-    padding: 2rem;
+    padding: 1rem 2rem;
     @include media('<=desktop') {
         padding: 1rem;
     }

@@ -32,7 +32,8 @@ export default {
     plugins: [
         '~/plugins/format-price.js',
         '~/plugins/axios-accessor.ts',
-        '~/plugins/vue-toast-notification.js'
+        '~/plugins/vue-toast-notification.js',
+        '~/plugins/offline-cart.client.js',
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -47,6 +48,7 @@ export default {
     // Modules (https://go.nuxtjs.dev/config-modules)
     modules: [
         // https://go.nuxtjs.dev/axios
+        '@nuxtjs/auth',
         '@nuxtjs/axios',
         // https://go.nuxtjs.dev/pwa
         '@nuxtjs/pwa',

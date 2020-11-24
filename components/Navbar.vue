@@ -56,11 +56,12 @@
           <i class="icon fas fa-sign-in-alt"></i> Login / Register
         </div>
         <div
-          class="nav-link"
+          class="nav-link cart"
           :class="{ active: $nuxt.$route.path.startsWith('/cart') }"
           @click="goToPage('/cart')"
         >
           <i class="icon fas fa-cart-arrow-down"></i> Cart
+          <div class="cart-item-count" v-show="cartItemCount > 0">{{cartItemCount >= 10 ? "9+" : cartItemCount}}</div>
         </div>
       </div>
     </div>
@@ -72,6 +73,7 @@ import { Vue, Component, Prop, Watch } from "nuxt-property-decorator";
 import LoginModal from "~/components/LoginModal.vue";
 import RegisterModal from "~/components/RegisterModal.vue";
 import Modal from "~/components/Modal.vue";
+import {CartStoreState} from '~/store/cart_store';
 
 @Component({
   components: { RegisterModal },
@@ -80,6 +82,10 @@ export default class Navbar extends Vue {
   collapsed: boolean = true;
   showLoginModal: boolean = false;
   showRegisterModal: boolean = false;
+
+  get cartItemCount() :number {
+    return (this.$store.state.cart_store as CartStoreState).list.length
+  }
 
   runFunctionAfter(functionToRun: Function, delay: number) {
     setTimeout(functionToRun, delay);

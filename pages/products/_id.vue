@@ -47,7 +47,7 @@
             </div>
             <div class="action-button-container">
               <button class="button buy-now">Buy Now</button>
-              <button class="button add-to-cart">Add To Cart</button>
+              <button class="button add-to-cart" @click="addToCart()">Add To Cart</button>
             </div>
           </div>
         </div>
@@ -139,6 +139,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 import Review from "~/components/Review.vue";
 import GalleryProduct from "~/components/GalleryProduct.vue";
 import { ProductItemState } from "~/store/product_item_store";
+import { ToastComponent } from "vue-toast-notification";
 
 @Component({
   components: {
@@ -172,8 +173,30 @@ export default class SingleProductPage extends Vue {
       "Uncategorized"
     );
   }
-
-  mounted() {}
+  
+  addToCart() {
+    let instance : ToastComponent = this.$toast.open({
+        message: "Adding item to cart...",
+        type: "info",
+        duration: 10000,
+        position: "bottom",
+        // all of other options may go here
+      });
+    this.$store.dispatch("cart_store/addToCart", {productItem: this.product})
+    .then(() => {
+      this.$toast.open({
+        message: "Item added to cart",
+        type: "success",
+        duration: 2000,
+        position: "bottom",
+        // all of other options may go here
+      });
+    }).finally(() => {
+      setTimeout(()=> {
+        instance.close();
+      }, 1000)
+    })
+  }
 
   get displayPhoto() {
     return (

@@ -92,4 +92,10 @@ export const actions: ActionTree<ProductItemState, RootState> = {
 				}).catch(err => { reject(err) })
 		})
 	},
+
+	addToCart({ commit }, { product }) {
+		return new Promise((resolve, reject) => {
+			resolve()
+		})
+	}
 }

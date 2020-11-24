@@ -1,13 +1,6 @@
 @import '~assets/styles/include-media';
 @import '~assets/styles/variables';
-@mixin blur-mixin($val) {
-    -webkit-filter: blur(#{$val});
-    -moz-filter: blur(#{$val});
-    -o-filter: blur(#{$val});
-    -ms-filter: blur(#{$val});
-    filter: blur(#{$val});
-}
-
+@import '~assets/styles/blur';
 @keyframes not-active-animation {
     from {
         @include blur-mixin(0px);

@@ -118,6 +118,20 @@
                     margin-right: 0;
                     width: 100%;
                 }
+                &.cart {
+                    position: relative;
+                    .cart-item-count {
+                        position: absolute;
+                        color: white;
+                        background: rgba($accent-1, 0.5);
+                        display: inline-block;
+                        font-size: 0.7rem;
+                        padding: 0.1rem 0.5rem;
+                        border-radius: 1rem;
+                        right: 0;
+                        top: 0.5rem;
+                    }
+                }
                 &:last-child {
                     margin-right: 0;
                 }

@@ -216,15 +216,15 @@
                 justify-content: center;
                 font-size: 0.7rem;
                 margin-right: 0.5rem;
-                margin-bottom: 0.2rem;
+                margin-bottom: 0.2rem !important;
                 background: rgba($dark, 0.1);
                 border: solid 1px rgba($dark, 0.29);
                 border-radius: 5px;
                 padding: 0.15rem 0.3rem;
                 font-weight: 500;
-                &:last-child {
-                    margin-right: 0;
-                }
+                // &:last-child {
+                //     margin-right: 0;
+                // }
             }
         }
     }

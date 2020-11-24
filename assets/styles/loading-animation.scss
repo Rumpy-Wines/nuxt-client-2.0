@@ -1,0 +1,61 @@
+@keyframes loading-background {
+    0% {
+        background: #ccc;
+        background: linear-gradient( 45deg, #ccc, #ccc, #ccc, #ccc, #ccc, #ccc, #ccc, rgb(193 193 193 / 50%));
+    }
+    10% {
+        background: #ccc;
+        background: linear-gradient( 45deg, rgb(193 193 193 / 50%), #ccc, #ccc, #ccc, #ccc, #ccc, #ccc, #ccc);
+    }
+    20% {
+        background: #ccc;
+        background: linear-gradient( 45deg, transparent, rgb(193 193 193 / 50%), #ccc, #ccc, #ccc, #ccc, #ccc, #ccc);
+    }
+    30% {
+        background: #ccc;
+        background: linear-gradient( 45deg, transparent, transparent, rgb(193 193 193 / 50%) #ccc, #ccc, #ccc, #ccc, #ccc);
+    }
+    40% {
+        background: #ccc;
+        background: linear-gradient( 45deg, rgb(193 193 193 / 50%), transparent, transparent, rgb(193 193 193 / 50%), #ccc, #ccc, #ccc, #ccc);
+    }
+    50% {
+        background: #ccc;
+        background: linear-gradient( 45deg, #ccc, rgb(193 193 193 / 50%), transparent, transparent, rgb(193 193 193 / 50%), #ccc, #ccc, #ccc);
+    }
+    50% {
+        background: #ccc;
+        background: linear-gradient( 45deg, #ccc, #ccc, rgb(193 193 193 / 50%), transparent, transparent, rgb(193 193 193 / 50%), #ccc, #ccc);
+    }
+    60% {
+        background: #ccc;
+        background: linear-gradient( 45deg, #ccc, #ccc, #ccc, rgb(193 193 193 / 50%), transparent, transparent, rgb(193 193 193 / 50%), #ccc);
+    }
+    70% {
+        background: #ccc;
+        background: linear-gradient( 45deg, #ccc, #ccc, #ccc, #ccc, rgb(193 193 193 / 50%), transparent, transparent, rgb(193 193 193 / 50%));
+    }
+    80% {
+        background: #ccc;
+        background: linear-gradient( 45deg, #ccc, #ccc, #ccc, #ccc, #ccc, rgb(193 193 193 / 50%), transparent, transparent);
+    }
+    90% {
+        background: #ccc;
+        background: linear-gradient( 45deg, #ccc, #ccc, #ccc, #ccc, #ccc, #ccc, rgb(193 193 193 / 50%), transparent);
+    }
+    100% {
+        background: #ccc;
+        background: linear-gradient( 45deg, #ccc, #ccc, #ccc, #ccc, #ccc, #ccc, #ccc, #ccc, #ccc, rgb(193 193 193 / 50%));
+    }
+}
+
+.__loading-background {
+    animation-name: loading-background;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    &::before,
+    &::after {
+        display: none;
+    }
+}

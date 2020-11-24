@@ -8,22 +8,43 @@
 	</section>
 	<ProductsMiniNavbar />
 	<section class="products-showcase-section">
-		<GalleryProduct v-for="i in 7" :key="i" />
+		<GalleryProduct v-for="product in products" :key="product.id" :product="product" />
 	</section>
 </div>
 </template>
 
-<script>
-import ProductsMiniNavbar from '~/components/ProductsMiniNavbar';
-import GalleryProduct from '~/components/GalleryProduct';
+<script lang="ts">
+import { Vue, Component, Prop } from "nuxt-property-decorator";
+import ProductsMiniNavbar from "~/components/ProductsMiniNavbar.vue";
+import GalleryProduct from "~/components/GalleryProduct.vue";
+import { ProductItemState } from "~/store/product_item_store";
 
-export default {
-	components: {
-		ProductsMiniNavbar,
-		GalleryProduct
-	}
+@Component({
+  components: {
+    ProductsMiniNavbar,
+    GalleryProduct,
+  },
+})
+export default class RoseWinePage extends Vue {
+	pageCategory: string = "ROSE";
+
+  async fetch() {
+    await this.$store.dispatch("product_item_store/fetchProductItemsByCategory", {
+      category: this.pageCategory,
+    });
+  }
+
+  get productItemState(): ProductItemState {
+    return this.$store.state.product_item_store as ProductItemState;
+  }
+
+  get products() {
+    //@ts-ignore
+    return this.productItemState.categoryPaginationData[this.pageCategory].content || [];
+  }
 }
 </script>
+
 
 <style lang="scss" scoped>
 @import '~assets/styles/pages/products/index';

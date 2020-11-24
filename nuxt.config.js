@@ -1,9 +1,13 @@
 export default {
-    // server: {
-    //     host: '0.0.0.0',
-    //     port: '4000'
-    // },
+    fetchOnServer: false,
+    server: {
+        host: '0.0.0.0',
+        port: '4000'
+    },
     // Global page headers (https://go.nuxtjs.dev/config-head)
+    env: {
+        API_URL: process.env.API_URL
+    },
     head: {
         title: 'rumpy',
         meta: [
@@ -20,11 +24,14 @@ export default {
 
     // Global CSS (https://go.nuxtjs.dev/config-css)
     css: [
-        '~assets/styles/style.scss'
+        '~assets/styles/style.scss',
+        '~assets/styles/loading-animation.scss'
     ],
 
     // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
     plugins: [
+        '~/plugins/format-price.js',
+        '~/plugins/axios-accessor.ts',
         '~/plugins/vue-toast-notification.js'
     ],
 
@@ -46,7 +53,9 @@ export default {
     ],
 
     // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-    axios: {},
+    axios: {
+        baseURL: process.env.API_URL
+    },
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)
     build: {}

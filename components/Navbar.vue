@@ -52,7 +52,7 @@
         >
           <i class="icon fas fa-user-alt"></i> Account
         </div>
-        <div class="nav-link" @click="showRegisterModalFunction()">
+        <div v-if="!loggedIn" class="nav-link" @click="showRegisterModalFunction()">
           <i class="icon fas fa-sign-in-alt"></i> Login / Register
         </div>
         <div
@@ -82,6 +82,10 @@ export default class Navbar extends Vue {
   collapsed: boolean = true;
   showLoginModal: boolean = false;
   showRegisterModal: boolean = false;
+
+  get loggedIn () {
+    return this.$auth.loggedIn
+  }
 
   get cartItemCount() :number {
     return (this.$store.state.cart_store as CartStoreState).list.length

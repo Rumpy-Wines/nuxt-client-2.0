@@ -177,3 +177,7 @@ select {
         border: rgba($dark, 0.3) solid 0.5px;
     }
 }
+
+.border-color-danger {
+    border-color: $danger-red !important;
+}

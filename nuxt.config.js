@@ -54,6 +54,29 @@ export default {
         '@nuxtjs/pwa',
     ],
 
+    auth: {
+        // redirect: {
+        //     login: '/login',
+        //     logout: '/',
+        //     callback: '/login',
+        //     home: '/'
+        // },
+        watchLoggedIn: false,
+        strategies: {
+            local: {
+                endpoints: {
+                    login: { url: '/auth/authenticate', method: 'post', propertyName: 'jwt' },
+                    // logout: { url: '/api/auth/logout', method: 'post' },
+                    user: { url: '/auth/user', method: 'get', propertyName: '' }
+                },
+                // tokenRequired: true,
+                tokenType: 'Bearer',
+                // globalToken: true,
+                // autoFetchUser: true
+            }
+        }
+    },
+
     // Axios module configuration (https://go.nuxtjs.dev/config-axios)
     axios: {
         baseURL: process.env.API_URL

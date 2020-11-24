@@ -59,3 +59,7 @@ $class-name-separator: "-" !default; // or "--" for BEM
 .text-color-callout {
     color: $callout-color;
 }
+
+.text-color-error {
+    color: $danger-red;
+}

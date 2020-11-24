@@ -13,6 +13,7 @@
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/pwa": "^3.0.2",
+    "@types/vue2-datepicker": "^3.3.0",
     "core-js": "^3.6.5",
     "lodash": "^4.17.20",
     "nuxt": "^2.14.6",
@@ -21,7 +22,8 @@
     "sass-loader": "^10.0.5",
     "vue-class-component": "^7.2.6",
     "vue-property-decorator": "^9.0.2",
-    "vue-toast-notification": "^0.5.4"
+    "vue-toast-notification": "^0.5.4",
+    "vue2-datepicker": "^3.8.0"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.6",

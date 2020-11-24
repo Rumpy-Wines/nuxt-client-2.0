@@ -66,7 +66,7 @@ export default {
             local: {
                 endpoints: {
                     login: { url: '/auth/authenticate', method: 'post', propertyName: 'jwt' },
-                    // logout: { url: '/api/auth/logout', method: 'post' },
+                    logout: { url: '/auth/logout', method: 'post' },
                     user: { url: '/auth/user', method: 'get', propertyName: '' }
                 },
                 // tokenRequired: true,

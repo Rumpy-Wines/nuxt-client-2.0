@@ -12,9 +12,9 @@
       <light-card @icon-clicked="showEditProfileDetialsModal = true">
         <template v-slot:header-text>Account Details</template>
         <template v-slot:icon><i class="fas fa-pencil-alt"></i></template>
-        <template v-slot:body-header-text>Oyinbo David Bayode</template>
+        <template v-slot:body-header-text>{{user.name || `!!Name Not Set!!`}}</template>
         <div>
-          <div class="account-email">davexoyinbo@gmail.com</div>
+          <div class="account-email">{{user.email}}</div>
           <div class="questions-responses">
             <div class="questions">
               <div class="question">Sex</div>
@@ -23,9 +23,9 @@
             </div>
             <div class="divider"></div>
             <div class="responses">
-              <div class="response">Male</div>
-              <div class="response">+2348094183083</div>
-              <div class="response">14th of October, 1998</div>
+              <div class="response">{{genderMap[user.gender] || `!!Unset!!`}}</div>
+              <div class="response">{{user.phoneNumber || `!!Unset!!`}}</div>
+              <div class="response">{{user.dateOfBirth || `!!Unset!!`}}</div>
             </div>
           </div>
         </div>
@@ -60,11 +60,20 @@ import EditProfileDetailsModal from "~/components/EditProfileDetailsModal.vue";
 })
 export default class Account extends Vue {
   showEditProfileDetialsModal: boolean = false;
+  genderMap = {
+    MALE: "Male",
+    FEMALE: "Female",
+    OTHER: "Rather not say"
+  }
 
   goToPage(path: string) {
     if (this.$nuxt.$route.fullPath == path) return;
 
     this.$nuxt.$router.push(path);
+  }
+
+  get user() {
+    return this.$auth.user
   }
 }
 </script>

@@ -13,10 +13,10 @@
 		  <div class="nav" :class="{active: $nuxt.$route.path == '/account/orders'}" @click="goToPage('/account/orders')">
 			  <i class="fas fa-dolly"></i><span class="text">Orders</span>
 		  </div>
-		  <div class="nav" :class="{active: $nuxt.$route.path == '/account/change-password'}" @click="goToPage('/account/change-password')">
+		  <div class="nav" v-if="$auth.loggedIn" :class="{active: $nuxt.$route.path == '/account/change-password'}" @click="goToPage('/account/change-password')">
 			  <i class="fas fa-user-lock"></i><span class="text">Change Password</span>
 		  </div>
-		  <div class="nav logout">
+		  <div class="nav logout" @click="logout()" v-if="$auth.loggedIn">
 			  <i class="fas fa-plug"></i><span class="text">Logout</span>
 		  </div>
 	  </div>
@@ -46,6 +46,10 @@ export default class Sidebar extends Vue {
 		console.log("Mounted")
 		document.addEventListener('touchstart', this.documentTouchStartEventListener)
 		document.addEventListener('click', this.documentTouchStartEventListener)
+	}
+	logout() {
+		this.collapsed = true
+		this.$auth.logout()
 	}
 
 	goToPage(path: string) {

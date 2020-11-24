@@ -54,5 +54,15 @@ export const actions: ActionTree<RootState, RootState> = {
 				})
 
 		})
+	},
+	setupUser({}, {formData}) {
+		return new Promise((resolve, reject) => {
+			this.$axios.post("/auth/setup", formData)
+			.then(async () => {
+				//@ts-ignore
+				await this.$auth.fetchUser()
+				resolve()
+			})
+		})
 	}
 }

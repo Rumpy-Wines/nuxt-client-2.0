@@ -64,6 +64,19 @@ export const mutations: MutationTree<CartStoreState> = {
 
 			localStorage.setItem(state.localStorageKey, JSON.stringify(state.list))
 		}
+	},
+	REMOVE_CART_ITEM(state, {cartItem}) {
+		//@ts-ignore
+		if (!this.$auth.loggedIn) {
+			let index = state.list.findIndex((el: any) => el.id == cartItem.id)
+			
+			if(index >= 0){
+				//@ts-ignore
+				state.list.splice(index, 1)
+			}
+
+			localStorage.setItem(state.localStorageKey, JSON.stringify(state.list))
+		}
 	}
 }
 export const actions: ActionTree<CartStoreState, RootState> = {
@@ -81,6 +94,15 @@ export const actions: ActionTree<CartStoreState, RootState> = {
 			//@ts-ignore
 			if (!this.$auth.loggedIn) {
 				commit("UPDATE_CART_ITEM", { cartItem })
+				resolve()
+			}
+		})
+	},
+	removeCartItem({commit}, {cartItem}) {
+		return new Promise((resolve, reject) => {
+			//@ts-ignore
+			if (!this.$auth.loggedIn) {
+				commit("REMOVE_CART_ITEM", { cartItem })
 				resolve()
 			}
 		})

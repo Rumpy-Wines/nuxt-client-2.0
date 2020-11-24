@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-item" :class="{'not-active': !cartItem.isActive}">
+  <div class="cart-item" :class="{ 'not-active': !cartItem.isActive }">
     <div class="image-container">
       <div
         class="image"
@@ -46,15 +46,23 @@
           </option>
         </select>
         <div class="deep">
-          <button class="exclude-button" @click="setIsActive(false)" v-show="cartItem.isActive">
+          <button
+            class="exclude-button"
+            @click="setIsActive(false)"
+            v-show="cartItem.isActive"
+          >
             <i class="icon fas fa-minus"></i>
             Exclude
           </button>
-          <button class="include-button" @click="setIsActive(true)" v-show="!cartItem.isActive">
+          <button
+            class="include-button"
+            @click="setIsActive(true)"
+            v-show="!cartItem.isActive"
+          >
             <i class="icon fas fa-plus"></i>
             Include
           </button>
-          <button class="remove-button">
+          <button class="remove-button" @click="removeCartItem()">
             <i class="icon fas fa-trash-alt"></i>
             Remove
           </button>
@@ -67,6 +75,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "nuxt-property-decorator";
 import _ from "lodash";
+import { ToastComponent } from "vue-toast-notification";
 
 @Component
 export default class CartItem extends Vue {
@@ -91,8 +100,8 @@ export default class CartItem extends Vue {
     let cartItemClone = _.cloneDeep(this.cartItem);
     cartItemClone.itemCount = value;
 
-    if(cartItemClone.itemCount > cartItemClone.productItem.numberAvailable)
-      cartItemClone.itemCount = cartItemClone.productItem.numberAvailable
+    if (cartItemClone.itemCount > cartItemClone.productItem.numberAvailable)
+      cartItemClone.itemCount = cartItemClone.productItem.numberAvailable;
     this.$store.dispatch("cart_store/updateCartItem", {
       cartItem: cartItemClone,
     });
@@ -100,10 +109,36 @@ export default class CartItem extends Vue {
 
   setIsActive(isActive: boolean) {
     let cartItemClone = _.cloneDeep(this.cartItem);
-    cartItemClone.isActive = isActive
+    cartItemClone.isActive = isActive;
     this.$store.dispatch("cart_store/updateCartItem", {
       cartItem: cartItemClone,
     });
+  }
+
+  removeCartItem() {
+    let instance: ToastComponent = this.$toast.open({
+      message: "Removing item from cart...",
+      type: "info",
+      duration: 10000,
+      position: "bottom",
+      // all of other options may go here
+    });
+    this.$store
+      .dispatch("cart_store/removeCartItem", { cartItem: this.cartItem })
+      .then(() => {
+        this.$toast.open({
+          message: "Item removed",
+          type: "success",
+          duration: 2000,
+          position: "bottom",
+          // all of other options may go here
+        });
+      })
+      .finally(() => {
+        setTimeout(() => {
+          instance.close();
+        }, 1000);
+      });
   }
 }
 </script>

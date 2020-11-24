@@ -147,6 +147,10 @@ export default class Navbar extends Vue {
       this.documentTouchStartEventListener
     );
     document.addEventListener("click", this.documentTouchStartEventListener);
+
+    this.$nuxt.$on("login-needed", () => {
+      this.showRegisterModalFunction()
+    })
   }
 
   toggleNavbar() {

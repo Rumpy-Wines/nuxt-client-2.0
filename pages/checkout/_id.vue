@@ -118,12 +118,14 @@ import EditProfileDetailsModal from "~/components/EditProfileDetailsModal.vue";
 import CreateEditAddressModal from "~/components/CreateEditAddressModal.vue";
 
 @Component({
+  middleware: ['authenticated'],
   components: { LightCard, EditProfileDetailsModal, CreateEditAddressModal },
 })
 export default class CheckoutPage extends Vue {
   activeIndex: number = 0;
   showEditProfileDetailsModal: boolean = false;
   showAddressModal: boolean = false;
+
 
   updateActiveIndex(val: number) {
     this.activeIndex = val;

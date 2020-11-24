@@ -72,7 +72,7 @@
 .cart-item.not-active {
     .content>*,
     .quantity-input {
-        @include blur-mixin(1px);
+        @include blur-mixin(0.7px);
     }
     .actions-container {
         @include blur-mixin(0px);

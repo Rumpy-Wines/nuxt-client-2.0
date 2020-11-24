@@ -12,6 +12,12 @@
         style="height: 15rem; border-radius: 5px"
       ></div>
     </div>
+    <div v-else-if="cartItems.length == 0">
+      <div class="cart-empty">
+        <i class="icon fas fa-exclamation"></i> <span>Cart is empty</span>
+		<button class="button" @click="goToPage('/products')">Continue Shopping</button>
+      </div>
+    </div>
     <div class="cart-items-container" v-else>
       <cart-item
         :cartItem="cartItem"
@@ -19,15 +25,19 @@
         :key="cartItem.id"
       />
     </div>
-    <div class="total-container display-flex justify-content-fe m-t-4">
+    <div
+      v-if="!cartItemsLoading && cartItems.length > 0"
+      class="total-container display-flex justify-content-fe m-t-4"
+    >
       <div class="total-card">
         Total: <span class="value">NGN {{ $formatPrice(totalPrice) }}</span>
       </div>
     </div>
     <div
+      v-if="!cartItemsLoading && cartItems.length > 0"
       class="checkout-button-container display-flex justify-content-fe m-t-2"
     >
-      <button class="checkout-button" @click="goToPage('/checkout')">
+      <button class="checkout-button" @click="checkout()">
         Proceed To Checkout
       </button>
     </div>
@@ -62,13 +72,21 @@ export default class CartPage extends Vue {
     let totalPrice = 0;
 
     for (let cartItem of this.cartItems) {
-		//@ts-ignore
+      //@ts-ignore
       if (cartItem.isActive) {
-		//@ts-ignore
+        //@ts-ignore
         totalPrice += cartItem.itemCount * cartItem.productItem.pricePerItem;
       }
     }
     return totalPrice;
+  }
+
+  checkout() {
+    if (!this.$auth.loggedIn) {
+      this.$nuxt.$emit("login-needed");
+      return;
+    }
+    this.goToPage("/checkout");
   }
 }
 </script>

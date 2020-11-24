@@ -20,6 +20,9 @@ export default {
     Footer,
     Sidebar,
   },
+  async fetch() {
+	await this.$store.dispatch("cart_store/cartItemCount")
+  }
 };
 </script>
 <style lang="scss" scoped>

@@ -36,7 +36,7 @@ export const actions: ActionTree<RootState, RootState> = {
 				}).catch(err => { reject(err.response.data) })
 		})
 	},
-	login({ }, {email, password}: LoginDetailsInterface) {
+	login({ dispatch }, {email, password}: LoginDetailsInterface) {
 		return new Promise((resolve, reject) => {
 			let formData = new FormData()
 
@@ -45,7 +45,8 @@ export const actions: ActionTree<RootState, RootState> = {
 
 			//@ts-ignore
 			this.$auth.login({ data: formData })
-				.then(() => {
+				.then(async() => {
+					dispatch("cart_store/moveCartOnline")
 					resolve()
 				})
 				.catch((err: any) => {

@@ -60,8 +60,16 @@ export default class CartPage extends Vue {
     this.$nuxt.$router.push(path);
   }
 
+  async fetch() {
+    await this.$store.dispatch("cart_store/fetchCartItems")
+  }
+
   get cartItemsLoading() {
-    return !(this.$store.state.cart_store as CartStoreState).loaded;
+    let offlineLoading = !(this.$store.state.cart_store as CartStoreState).loaded
+    let onlineLoading = this.$fetchState.pending
+
+    if(this.$auth.loggedIn) return onlineLoading
+    else return offlineLoading
   }
 
   get cartItems() {

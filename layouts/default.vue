@@ -16,6 +16,10 @@ export default {
     Navbar,
     Footer,
   },
+
+  async fetch() {
+    await this.$store.dispatch("cart_store/cartItemCount");
+  },
 };
 </script>
 <style scoped lang="scss">

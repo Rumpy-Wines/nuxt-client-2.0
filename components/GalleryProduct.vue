@@ -75,7 +75,8 @@ export default class GalleryProduct extends Vue {
         position: "bottom",
         // all of other options may go here
       });
-    }).finally(() => {
+    })
+    .finally(() => {
       setTimeout(()=> {
         instance.close();
       }, 1000)

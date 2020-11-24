@@ -4,7 +4,8 @@ import { RootState } from '~/store';
 export const state = () => ({
 	localStorageKey: "cart_items",
 	list: [],
-	loaded: false
+	loaded: false,
+	itemCount: 0
 })
 
 export type CartStoreState = ReturnType<typeof state>
@@ -16,16 +17,20 @@ interface CartItemInterface {
 	productItem: any
 }
 export const getters: GetterTree<CartStoreState, RootState> = {
-	
+
 }
 
 export const mutations: MutationTree<CartStoreState> = {
-	VALIDATE_OFFLINE_CART_ITEMS(state){
+	FETCH_CART_ITEMS(state, {cartItems}){
+		state.list = cartItems
+	},
+	VALIDATE_OFFLINE_CART_ITEMS(state) {
 		//@ts-ignore
 		state.list = JSON.parse(localStorage.getItem(state.localStorageKey)) || []
 		state.loaded = true
+		state.itemCount = state.list.length
 	},
-	ADD_ITEM_TO_CART(state, { productItem }) {
+	ADD_ITEM_TO_CART(state, { productItem, cartItem }) {
 		//@ts-ignore
 		if (!this.$auth.loggedIn) {
 			//@ts-ignore
@@ -43,53 +48,105 @@ export const mutations: MutationTree<CartStoreState> = {
 				cartItem.productItem = productItem
 				//@ts-ignore
 				state.list.splice(index, 1, cartItem)
-			}else {
+			} else {
 				cartItem.productItem = productItem
 				//@ts-ignore
 				state.list.unshift(cartItem)
 			}
 
+			state.itemCount = state.list.length
 			localStorage.setItem(state.localStorageKey, JSON.stringify(state.list))
+		}else {
+			let index = state.list.findIndex((el: any) => el.id == cartItem.id)
+
+			if(index < 0){
+				//@ts-ignore
+				state.list.unshift(cartItem)
+			}else {
+				//@ts-ignore
+				state.list.splice(index, 1, cartItem)
+			}
 		}
 	},
-	UPDATE_CART_ITEM(state, {cartItem}) {
+	UPDATE_CART_ITEM(state, { cartItem }) {
 		//@ts-ignore
 		if (!this.$auth.loggedIn) {
 			let index = state.list.findIndex((el: any) => el.id == cartItem.id)
-			
-			if(index >= 0){
+
+			if (index >= 0) {
 				//@ts-ignore
 				state.list.splice(index, 1, cartItem)
 			}
 
+			state.itemCount = state.list.length
 			localStorage.setItem(state.localStorageKey, JSON.stringify(state.list))
 		}
 	},
-	REMOVE_CART_ITEM(state, {cartItem}) {
+	REMOVE_CART_ITEM(state, { cartItem }) {
 		//@ts-ignore
 		if (!this.$auth.loggedIn) {
 			let index = state.list.findIndex((el: any) => el.id == cartItem.id)
-			
-			if(index >= 0){
+
+			if (index >= 0) {
 				//@ts-ignore
 				state.list.splice(index, 1)
 			}
-
+			state.itemCount = state.list.length
 			localStorage.setItem(state.localStorageKey, JSON.stringify(state.list))
 		}
+	},
+	CART_ITEM_COUNT(state, {itemCount}){
+		state.itemCount = itemCount
 	}
 }
 export const actions: ActionTree<CartStoreState, RootState> = {
-	addToCart({ commit }, { productItem }) {
+	fetchCartItems({ commit }) {
+		return new Promise((resolve, reject) => {
+			//@ts-ignore
+			if (!this.$auth.loggedIn) {
+				resolve()
+				return
+			}
+
+			this.$axios.$get("/cart")
+				.then(cartItems => {
+					commit("FETCH_CART_ITEMS", { cartItems })
+					resolve()
+				}).catch(err => { reject(err) })
+		})
+	},
+	addToCart({ commit, dispatch }, { productItem, itemCount }) {
 		return new Promise((resolve, reject) => {
 			//@ts-ignore
 			if (!this.$auth.loggedIn) {
 				commit("ADD_ITEM_TO_CART", { productItem })
 				resolve()
+			} else {
+				itemCount = itemCount || 1
+
+				let formData = new FormData()
+
+				// Object.keys(node).each(key => {
+				// 	formData.append(key, node[key]);
+				// }
+
+				formData.set("itemCount", itemCount)
+				formData.set("productItemId", productItem.id)
+
+				this.$axios.post("/cart", formData)
+				.then(response => response.data)
+				.then(async (cartItem) => {
+					commit("ADD_ITEM_TO_CART", { cartItem })
+					await dispatch("cartItemCount")
+					resolve()
+				}).catch(err => {
+					// debugger
+					reject(err)
+				})
 			}
 		})
 	},
-	updateCartItem({commit}, {cartItem}) {
+	updateCartItem({ commit }, { cartItem }) {
 		return new Promise((resolve, reject) => {
 			//@ts-ignore
 			if (!this.$auth.loggedIn) {
@@ -98,13 +155,36 @@ export const actions: ActionTree<CartStoreState, RootState> = {
 			}
 		})
 	},
-	removeCartItem({commit}, {cartItem}) {
+	removeCartItem({ commit }, { cartItem }) {
 		return new Promise((resolve, reject) => {
 			//@ts-ignore
 			if (!this.$auth.loggedIn) {
 				commit("REMOVE_CART_ITEM", { cartItem })
 				resolve()
 			}
+		})
+	},
+	moveCartOnline({ commit, dispatch, state }) {
+		return new Promise(async (resolve, reject) => {
+			commit("VALIDATE_OFFLINE_CART_ITEMS")
+
+			for(let cartItem of state.list){
+				await dispatch("addToCart", {
+					productItem: (cartItem as any).productItem,
+					itemCount: (cartItem as any).itemCount
+				}).catch(err => {})
+			}
+			resolve()
+		})
+	},
+	cartItemCount({commit}) {
+		return new Promise((resolve, reject) => {
+			this.$axios.get("/cart/count")
+			.then(response => response.data)
+				.then(itemCount => {
+					commit("CART_ITEM_COUNT", {itemCount})
+					resolve()
+				}).catch(err => {reject(err)})
 		})
 	}
 }

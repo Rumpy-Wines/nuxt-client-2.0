@@ -88,7 +88,7 @@ export default class Navbar extends Vue {
   }
 
   get cartItemCount() :number {
-    return (this.$store.state.cart_store as CartStoreState).list.length
+    return (this.$store.state.cart_store as CartStoreState).itemCount
   }
 
   runFunctionAfter(functionToRun: Function, delay: number) {

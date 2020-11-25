@@ -7,7 +7,18 @@
     <create-edit-address-modal
       v-if="showAddressModal"
       @modal-close="showAddressModal = false"
-    />
+      :address="addressForEdit"
+    >
+      <template v-slot:modal-header-text>
+        <span v-if="createAddress">Create New</span>
+        <span v-else>Edit</span> Address</template
+      >
+
+      <template v-slot:submit-button-text>
+        <span v-if="createAddress">Create</span>
+        <span v-else>Update</span></template
+      >
+    </create-edit-address-modal>
     <div class="account-setup" :class="{ 'not-active': activeIndex != 0 }">
       <div class="header">Account Record</div>
       <div v-if="!user.firstName" class="no-setup">
@@ -75,7 +86,9 @@
           </div>
         </div>
       </div>
-      <div class="total-price m-b-3">Total: NGN {{$formatPrice(totalPrice)}}</div>
+      <div class="total-price m-b-3">
+        Total: NGN {{ $formatPrice(totalPrice) }}
+      </div>
       <div class="actions-container display-flex justify-content-fe">
         <button class="button" @click="goToPage('/cart')">Modify Cart</button>
         <button class="continue-button" @click="updateActiveIndex(2)">
@@ -89,36 +102,61 @@
     >
       <div class="header">Shipping Address</div>
       <div class="light-card-container">
-        <light-card @icon-clicked="showAddressModal = true">
-          <template v-slot:header-text>School</template>
+        <light-card
+          v-if="addresses.length > 0 && featuredAddress"
+          @icon-clicked="addressForEdit = featuredAddress; showAddressModal = true"
+        >
+          <template v-slot:header-text>{{ featuredAddress.title }}</template>
           <template v-slot:icon><i class="fas fa-pencil-alt"></i></template>
-          <template v-slot:body-header-text>Default Shipping Address</template>
-          white gold guest house, 8, rail road line, budo giwa, Ilorin Ilorin -
-          Gaaakanbi-Asadam-Ganmo, Kwara +234 8094183083
+          <template v-slot:body-header-text><span v-if="featuredAddress.isDefault">Default Shipping Address</span> ( {{featuredAddress.title}} )</template>
+          {{ featuredAddress.addressString }}
 
           <div class="landmarks-container">
             <div class="landmarks">
-              <div class="landmark">Roemich International School</div>
-              <div class="landmark">White Gold Guest House</div>
-              <div class="landmark">Redeem Church</div>
+              <div
+                class="landmark"
+                v-for="landmark in featuredAddress.landmarks"
+                :key="landmark"
+              >
+                {{ landmark }}
+              </div>
             </div>
           </div>
         </light-card>
+        <div v-else>Your address book is empty</div>
       </div>
       <div
         class="actions-container m-t-3 flex-wrap-wrap display-flex justify-content-sb"
       >
-        <select name="" id="" class="change-address-select">
+        <select
+          ref="addressSelect"
+          v-if="addresses.length > 0"
+          name=""
+          id=""
+          @change="changeAddress()"
+          class="change-address-select"
+        >
           <option value="" disabled selected>Change Address</option>
-          <option value="1">School</option>
-          <option value="2">Home</option>
-          <option value="3">Shogo's House</option>
+          <option
+            :value="address.id"
+            v-for="address in addresses"
+            :key="address.id"
+          >
+            {{ address.title }}
+          </option>
         </select>
         <div class="">
-          <button class="button" @click="showAddressModal = true">
+          <button
+            class="button"
+            @click="
+              createAddress = true;
+              addressForEdit = {};
+              showAddressModal = true;
+            "
+          >
             <i class="fas fa-plus"></i> Add Address
           </button>
-          <button class="continue-button">
+          <button v-if="addresses.length > 0" class="continue-button" @click="checkout">
             Proceed To Payment <i class="fas fa-arrow-right"></i>
           </button>
         </div>
@@ -133,6 +171,7 @@ import LightCard from "~/components/LightCard.vue";
 import EditProfileDetailsModal from "~/components/EditProfileDetailsModal.vue";
 import CreateEditAddressModal from "~/components/CreateEditAddressModal.vue";
 import { CartStoreState } from "~/store/cart_store";
+import { AddressStoreState } from "~/store/address_store";
 
 @Component({
   middleware: ["authenticated"],
@@ -147,12 +186,36 @@ export default class CheckoutPage extends Vue {
     FEMALE: "Female",
     OTHER: "Rather not say",
   };
+  addressForEdit: object = {};
+  createAddress: boolean = false;
+  featuredAddressId: string = "";
 
   async fetch() {
+    await this.$store.dispatch("address_store/fetchAllAddresses");
+
     let id = this.$nuxt.$route.params.id;
     if (!id) {
       await this.$store.dispatch("cart_store/fetchCartItems");
     }
+  }
+
+  get addresses() {
+    return (this.$store.state.address_store as AddressStoreState).list;
+  }
+
+  get defaultAddress() {
+    return this.addresses.find((el: any) => el.isDefault);
+  }
+
+  get featuredAddress() {
+    if (this.featuredAddressId)
+      return this.addresses.find((el: any) => el.id == this.featuredAddressId);
+    return this.defaultAddress;
+  }
+
+  changeAddress() {
+    let value = (this.$refs.addressSelect as HTMLSelectElement).value;
+    if (value) this.featuredAddressId = value;
   }
 
   get cartItems() {
@@ -164,7 +227,7 @@ export default class CheckoutPage extends Vue {
   get totalPrice() {
     let total = 0;
 
-    for (let cartItem of this.cartItems) { 
+    for (let cartItem of this.cartItems) {
       //@ts-ignore
       total += cartItem.itemCount * cartItem.productItem.pricePerItem;
     }
@@ -188,6 +251,11 @@ export default class CheckoutPage extends Vue {
 
   get user() {
     return this.$auth.user;
+  }
+
+  checkout() {
+    if(!this.featuredAddress) return
+
   }
 }
 </script>

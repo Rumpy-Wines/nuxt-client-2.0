@@ -30,18 +30,21 @@
           </div>
         </div>
       </light-card>
-      <light-card @icon-clicked="goToPage('/account/address-book')">
-        <template v-slot:header-text>Address Book</template>
+      <light-card v-if="address" @icon-clicked="goToPage('/account/address-book')">
+        <template v-slot:header-text>Default Address</template>
         <template v-slot:icon><i class="fas fa-pencil-alt"></i></template>
-        <template v-slot:body-header-text>Home Address</template>
-        white gold guest house, 8, rail road line, budo giwa, Ilorin Ilorin -
-        Gaaakanbi-Asadam-Ganmo, Kwara +234 8094183083
+        <template v-slot:body-header-text>{{address.title}}</template>
+        {{address.addressString}}
 
         <div class="landmarks-container">
           <div class="landmarks">
-            <div class="landmark">Roemich International School</div>
-            <div class="landmark">White Gold Guest House</div>
-            <div class="landmark">Redeem Church</div>
+            <div
+              class="landmark"
+              v-for="landmark in address.landmarks"
+              :key="landmark"
+            >
+              {{ landmark }}
+            </div>
           </div>
         </div>
       </light-card>
@@ -53,6 +56,7 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 import LightCard from "~/components/LightCard.vue";
 import EditProfileDetailsModal from "~/components/EditProfileDetailsModal.vue";
+import { AddressStoreState } from "~/store/address_store";
 
 @Component({
   components: { LightCard, EditProfileDetailsModal },
@@ -64,6 +68,14 @@ export default class Account extends Vue {
     MALE: "Male",
     FEMALE: "Female",
     OTHER: "Rather not say"
+  }
+
+  async fetch() {
+    await this.$store.dispatch("address_store/fetchAllAddresses");
+  }
+
+  get address() {
+    return (this.$store.state.address_store as AddressStoreState).list.find((el: any) => el.isDefault == true);
   }
 
   goToPage(path: string) {

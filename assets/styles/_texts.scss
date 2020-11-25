@@ -63,3 +63,7 @@ $class-name-separator: "-" !default; // or "--" for BEM
 .text-color-error {
     color: $danger-red;
 }
+
+.text-align-center {
+    text-align: center;
+}

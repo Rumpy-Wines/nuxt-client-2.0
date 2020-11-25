@@ -85,14 +85,15 @@ export const mutations: MutationTree<CartStoreState> = {
 		}
 	},
 	REMOVE_CART_ITEM(state, { cartItem }) {
+		let index = state.list.findIndex((el: any) => el.id == cartItem.id)
+
+		if (index >= 0) {
+			//@ts-ignore
+			state.list.splice(index, 1)
+		}
+
 		//@ts-ignore
 		if (!this.$auth.loggedIn) {
-			let index = state.list.findIndex((el: any) => el.id == cartItem.id)
-
-			if (index >= 0) {
-				//@ts-ignore
-				state.list.splice(index, 1)
-			}
 			state.itemCount = state.list.length
 			localStorage.setItem(state.localStorageKey, JSON.stringify(state.list))
 		}
@@ -170,12 +171,19 @@ export const actions: ActionTree<CartStoreState, RootState> = {
 			}
 		})
 	},
-	removeCartItem({ commit }, { cartItem }) {
+	removeCartItem({ commit, dispatch }, { cartItem }) {
 		return new Promise((resolve, reject) => {
 			//@ts-ignore
 			if (!this.$auth.loggedIn) {
 				commit("REMOVE_CART_ITEM", { cartItem })
 				resolve()
+			}else{
+				this.$axios.delete(`/cart/${cartItem.id}`)
+					.then(async () => {
+						commit("REMOVE_CART_ITEM", { cartItem })
+						await dispatch("cartItemCount")
+						resolve()
+					}).catch(err => {reject(err)})
 			}
 		})
 	},

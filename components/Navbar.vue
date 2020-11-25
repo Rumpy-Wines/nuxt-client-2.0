@@ -22,6 +22,7 @@
     </div>
     <div ref="hambuger" class="hamburger-container" @click="toggleNavbar()">
       <i class="fas fa-bars"></i>
+      <div class="cart-item-count" v-show="cartItemCount > 0">{{cartItemCount >= 10 ? "9+" : cartItemCount}}</div>
     </div>
     <!-- <div class="nav-links-container collapsed"> -->
     <div

@@ -30,7 +30,7 @@
           </div>
         </div>
       </light-card>
-      <light-card @icon-clicked="goToPage('account/address-book')">
+      <light-card @icon-clicked="goToPage('/account/address-book')">
         <template v-slot:header-text>Address Book</template>
         <template v-slot:icon><i class="fas fa-pencil-alt"></i></template>
         <template v-slot:body-header-text>Home Address</template>

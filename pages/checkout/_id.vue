@@ -10,11 +10,13 @@
     />
     <div class="account-setup" :class="{ 'not-active': activeIndex != 0 }">
       <div class="header">Account Record</div>
-      <div v-if="false" class="no-setup">
+      <div v-if="!user.firstName" class="no-setup">
         <p>
           Your account has not been setup, press the button below to set it up.
         </p>
-        <button class="setup-account-button">Setup Account</button>
+        <button class="button" @click="showEditProfileDetailsModal = true">
+          Setup Account
+        </button>
       </div>
       <div v-else class="content">
         <div class="questions-responses">
@@ -26,10 +28,10 @@
           </div>
           <div class="divider"></div>
           <div class="responses">
-            <div class="response">Oyinbo David Bayode</div>
-            <div class="response">Male</div>
-            <div class="response">14th of October, 1998</div>
-            <div class="response">+2348094183083</div>
+            <div class="response">{{ user.name }}</div>
+            <div class="response">{{ genderMap[user.gender] }}</div>
+            <div class="response">{{ user.dateOfBirth }}</div>
+            <div class="response">{{ user.phoneNumber }}</div>
           </div>
         </div>
         <div
@@ -47,19 +49,33 @@
     <div class="items-summary" :class="{ 'not-active': activeIndex != 1 }">
       <div class="header">Items Summary</div>
       <div class="summary-items-container">
-        <div class="summary-item" v-for="i in 4" :key="i">
+        <div
+          class="summary-item"
+          v-for="cartItem in cartItems"
+          :key="cartItem.id"
+        >
           <div class="image-container">
             <div class="image"></div>
           </div>
           <div class="content">
-            <div class="name">Sauvignon Blanc</div>
-            <div class="year">1998</div>
-            <div class="price">NGN 234,999 X 3</div>
-            <div class="total">NGN 704,997</div>
+            <div class="name">{{ cartItem.productItem.name }}</div>
+            <div class="year">{{ cartItem.productItem.year }}</div>
+            <div class="price">
+              NGN {{ $formatPrice(cartItem.productItem.pricePerItem) }} X
+              {{ cartItem.itemCount }}
+            </div>
+            <div class="total">
+              NGN
+              {{
+                $formatPrice(
+                  cartItem.itemCount * cartItem.productItem.pricePerItem
+                )
+              }}
+            </div>
           </div>
         </div>
       </div>
-      <div class="total-price m-b-3">Total: NGN 1,234,999</div>
+      <div class="total-price m-b-3">Total: NGN {{$formatPrice(totalPrice)}}</div>
       <div class="actions-container display-flex justify-content-fe">
         <button class="button" @click="goToPage('/cart')">Modify Cart</button>
         <button class="continue-button" @click="updateActiveIndex(2)">
@@ -116,24 +132,62 @@ import { Vue, Component } from "nuxt-property-decorator";
 import LightCard from "~/components/LightCard.vue";
 import EditProfileDetailsModal from "~/components/EditProfileDetailsModal.vue";
 import CreateEditAddressModal from "~/components/CreateEditAddressModal.vue";
+import { CartStoreState } from "~/store/cart_store";
 
 @Component({
-  middleware: ['authenticated'],
+  middleware: ["authenticated"],
   components: { LightCard, EditProfileDetailsModal, CreateEditAddressModal },
 })
 export default class CheckoutPage extends Vue {
   activeIndex: number = 0;
   showEditProfileDetailsModal: boolean = false;
   showAddressModal: boolean = false;
+  genderMap = {
+    MALE: "Male",
+    FEMALE: "Female",
+    OTHER: "Rather not say",
+  };
 
+  async fetch() {
+    let id = this.$nuxt.$route.params.id;
+    if (!id) {
+      await this.$store.dispatch("cart_store/fetchCartItems");
+    }
+  }
+
+  get cartItems() {
+    return (this.$store.state.cart_store as CartStoreState).list.filter(
+      (el: any) => el.isActive == true
+    );
+  }
+
+  get totalPrice() {
+    let total = 0;
+
+    for (let cartItem of this.cartItems) { 
+      //@ts-ignore
+      total += cartItem.itemCount * cartItem.productItem.pricePerItem;
+    }
+    return total;
+  }
 
   updateActiveIndex(val: number) {
+    if (this.activeIndex >= val || val != this.activeIndex + 1) return;
+
+    if (this.activeIndex == 0) {
+      if (!this.user.firstName) return;
+    }
+
     this.activeIndex = val;
   }
 
   goToPage(path: string) {
     if (path == this.$nuxt.$route.fullPath) return;
     this.$nuxt.$router.push(path);
+  }
+
+  get user() {
+    return this.$auth.user;
   }
 }
 </script>

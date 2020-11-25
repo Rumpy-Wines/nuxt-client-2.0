@@ -1,6 +1,6 @@
 <template>
   <div>
-    <modal @modal-close="$emit('modal-close')">
+    <modal ref="modal" @modal-close="$emit('modal-close')">
       <template v-slot:modal-header-text>Edit Profile</template>
       <div>
         <form ref="form" action="" class="form" @submit.prevent="submitForm()">
@@ -176,8 +176,9 @@ export default class EditProfileDetailsModal extends Vue {
           type: "success",
           duration: 2000,
           position: "bottom"
-        })
-        this.close()
+        });
+
+        this.close();
       }).finally(() => {
         this.submitting = false
       })

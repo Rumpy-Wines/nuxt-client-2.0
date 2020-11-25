@@ -21,7 +21,7 @@ export const getters: GetterTree<CartStoreState, RootState> = {
 }
 
 export const mutations: MutationTree<CartStoreState> = {
-	FETCH_CART_ITEMS(state, {cartItems}){
+	FETCH_CART_ITEMS(state, { cartItems }) {
 		state.list = cartItems
 	},
 	VALIDATE_OFFLINE_CART_ITEMS(state) {
@@ -56,30 +56,32 @@ export const mutations: MutationTree<CartStoreState> = {
 
 			state.itemCount = state.list.length
 			localStorage.setItem(state.localStorageKey, JSON.stringify(state.list))
-		}else {
+		} else {
 			let index = state.list.findIndex((el: any) => el.id == cartItem.id)
 
-			if(index < 0){
+			if (index < 0) {
 				//@ts-ignore
 				state.list.unshift(cartItem)
-			}else {
+			} else {
 				//@ts-ignore
 				state.list.splice(index, 1, cartItem)
 			}
 		}
 	},
 	UPDATE_CART_ITEM(state, { cartItem }) {
+		let index = state.list.findIndex((el: any) => el.id == cartItem.id)
+
+		if (index >= 0) {
+			//@ts-ignore
+			state.list.splice(index, 1, cartItem)
+		}
+
+		
 		//@ts-ignore
 		if (!this.$auth.loggedIn) {
-			let index = state.list.findIndex((el: any) => el.id == cartItem.id)
-
-			if (index >= 0) {
-				//@ts-ignore
-				state.list.splice(index, 1, cartItem)
-			}
-
 			state.itemCount = state.list.length
 			localStorage.setItem(state.localStorageKey, JSON.stringify(state.list))
+		}else {
 		}
 	},
 	REMOVE_CART_ITEM(state, { cartItem }) {
@@ -95,7 +97,7 @@ export const mutations: MutationTree<CartStoreState> = {
 			localStorage.setItem(state.localStorageKey, JSON.stringify(state.list))
 		}
 	},
-	CART_ITEM_COUNT(state, {itemCount}){
+	CART_ITEM_COUNT(state, { itemCount }) {
 		state.itemCount = itemCount
 	}
 }
@@ -134,24 +136,37 @@ export const actions: ActionTree<CartStoreState, RootState> = {
 				formData.set("productItemId", productItem.id)
 
 				this.$axios.post("/cart", formData)
-				.then(response => response.data)
-				.then(async (cartItem) => {
-					commit("ADD_ITEM_TO_CART", { cartItem })
-					await dispatch("cartItemCount")
-					resolve()
-				}).catch(err => {
-					// debugger
-					reject(err)
-				})
+					.then(response => response.data)
+					.then(async (cartItem) => {
+						commit("ADD_ITEM_TO_CART", { cartItem })
+						await dispatch("cartItemCount")
+						resolve()
+					}).catch(err => {
+						// debugger
+						reject(err)
+					})
 			}
 		})
 	},
-	updateCartItem({ commit }, { cartItem }) {
+	updateCartItem({ commit, dispatch }, { cartItem }) {
 		return new Promise((resolve, reject) => {
 			//@ts-ignore
 			if (!this.$auth.loggedIn) {
 				commit("UPDATE_CART_ITEM", { cartItem })
 				resolve()
+			} else {
+				let formData = new FormData()
+				formData.set("id", cartItem.id)
+				formData.set("isActive", cartItem.isActive)
+				formData.set("itemCount", cartItem.itemCount)
+
+				this.$axios.put("/cart", formData)
+					.then(response => response.data)
+					.then(async (modifiedCartItem) => {
+						commit("UPDATE_CART_ITEM", { cartItem: modifiedCartItem })
+						await dispatch("cartItemCount")
+						resolve()
+					}).catch(err => {reject(err)})
 			}
 		})
 	},
@@ -168,23 +183,23 @@ export const actions: ActionTree<CartStoreState, RootState> = {
 		return new Promise(async (resolve, reject) => {
 			commit("VALIDATE_OFFLINE_CART_ITEMS")
 
-			for(let cartItem of state.list){
+			for (let cartItem of state.list) {
 				await dispatch("addToCart", {
 					productItem: (cartItem as any).productItem,
 					itemCount: (cartItem as any).itemCount
-				}).catch(err => {})
+				}).catch(err => { })
 			}
 			resolve()
 		})
 	},
-	cartItemCount({commit}) {
+	cartItemCount({ commit }) {
 		return new Promise((resolve, reject) => {
 			this.$axios.get("/cart/count")
-			.then(response => response.data)
+				.then(response => response.data)
 				.then(itemCount => {
-					commit("CART_ITEM_COUNT", {itemCount})
+					commit("CART_ITEM_COUNT", { itemCount })
 					resolve()
-				}).catch(err => {reject(err)})
+				}).catch(err => { reject(err) })
 		})
 	}
 }

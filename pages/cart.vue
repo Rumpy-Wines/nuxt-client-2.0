@@ -94,6 +94,17 @@ export default class CartPage extends Vue {
       this.$nuxt.$emit("login-needed");
       return;
     }
+
+    if(this.cartItems.filter((el: any) => el.isActive).length == 0){
+      this.$toast.open({
+        message: "Cart is empty or no active item",
+        type: "error",
+        position: "bottom",
+        duration: 10000
+      })
+
+      return
+    }
     this.goToPage("/checkout");
   }
 }

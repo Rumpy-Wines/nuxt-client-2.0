@@ -49,7 +49,10 @@ export default class Sidebar extends Vue {
 	}
 	logout() {
 		this.collapsed = true
-		this.$auth.logout()
+		this.$store.dispatch("logout")
+		.then(() => {
+			location.reload()
+		})
 	}
 
 	goToPage(path: string) {

@@ -25,8 +25,13 @@ export const mutations: MutationTree<CartStoreState> = {
 		state.list = cartItems
 	},
 	VALIDATE_OFFLINE_CART_ITEMS(state) {
-		//@ts-ignore
-		state.list = JSON.parse(localStorage.getItem(state.localStorageKey)) || []
+		try {
+			//@ts-ignore
+			state.list = JSON.parse(localStorage.getItem(state.localStorageKey)) || []
+		} catch (e) {
+			state.list = []
+			localStorage.setItem(state.localStorageKey, JSON.stringify([]))
+		 }
 		state.loaded = true
 		state.itemCount = state.list.length
 	},
@@ -76,12 +81,12 @@ export const mutations: MutationTree<CartStoreState> = {
 			state.list.splice(index, 1, cartItem)
 		}
 
-		
+
 		//@ts-ignore
 		if (!this.$auth.loggedIn) {
 			state.itemCount = state.list.length
 			localStorage.setItem(state.localStorageKey, JSON.stringify(state.list))
-		}else {
+		} else {
 		}
 	},
 	REMOVE_CART_ITEM(state, { cartItem }) {
@@ -167,7 +172,7 @@ export const actions: ActionTree<CartStoreState, RootState> = {
 						commit("UPDATE_CART_ITEM", { cartItem: modifiedCartItem })
 						await dispatch("cartItemCount")
 						resolve()
-					}).catch(err => {reject(err)})
+					}).catch(err => { reject(err) })
 			}
 		})
 	},
@@ -177,13 +182,13 @@ export const actions: ActionTree<CartStoreState, RootState> = {
 			if (!this.$auth.loggedIn) {
 				commit("REMOVE_CART_ITEM", { cartItem })
 				resolve()
-			}else{
+			} else {
 				this.$axios.delete(`/cart/${cartItem.id}`)
 					.then(async () => {
 						commit("REMOVE_CART_ITEM", { cartItem })
 						await dispatch("cartItemCount")
 						resolve()
-					}).catch(err => {reject(err)})
+					}).catch(err => { reject(err) })
 			}
 		})
 	},
@@ -209,5 +214,10 @@ export const actions: ActionTree<CartStoreState, RootState> = {
 					resolve()
 				}).catch(err => { reject(err) })
 		})
+	},
+	checkout({ }) {
+		// return new Promise((resolve, reject) => {
+
+		// })
 	}
 }

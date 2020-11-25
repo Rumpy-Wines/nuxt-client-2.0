@@ -46,7 +46,8 @@ export const actions: ActionTree<RootState, RootState> = {
 			//@ts-ignore
 			this.$auth.login({ data: formData })
 				.then(async() => {
-					dispatch("cart_store/moveCartOnline")
+					await dispatch("cart_store/moveCartOnline")
+					await dispatch("cart_store/fetchCartItems")
 					resolve()
 				})
 				.catch((err: any) => {
@@ -63,6 +64,15 @@ export const actions: ActionTree<RootState, RootState> = {
 				await this.$auth.fetchUser()
 				resolve()
 			})
+		})
+	},
+	logout({state}) {
+		return new Promise(async (resolve, reject) => {
+			//@ts-ignore
+			await this.$auth.logout()
+			//@ts-ignore
+			localStorage.setItem(state.cart_store.localStorageKey, JSON.stringify([]))
+			resolve()
 		})
 	}
 }

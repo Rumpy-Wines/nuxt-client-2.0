@@ -48,9 +48,9 @@ export default {
 
     // Modules (https://go.nuxtjs.dev/config-modules)
     modules: [
+        '@nuxtjs/axios',
         // https://go.nuxtjs.dev/axios
         '@nuxtjs/auth',
-        '@nuxtjs/axios',
         // https://go.nuxtjs.dev/pwa
         '@nuxtjs/pwa',
     ],

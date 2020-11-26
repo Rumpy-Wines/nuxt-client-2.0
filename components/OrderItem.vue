@@ -1,13 +1,13 @@
 <template>
   <div class="order-item">
     <div class="image-container">
-      <div class="image"></div>
+      <div class="image" :style="{ backgroundImage: `url('${displayPhoto}')` }"></div>
     </div>
     <div class="content">
-      <div class="name">Sauvignon Blanc</div>
-      <div class="year">1998</div>
-      <div class="price">NGN 239,999</div>
-      <div class="quantity">Quantity: <span class="value">3</span></div>
+      <div class="name">{{orderItem.name}}</div>
+      <div class="year">{{orderItem.year}}</div>
+      <div class="price">NGN {{$formatPrice(orderItem.pricePerItem)}} X {{orderItem.itemCount}}</div>
+      <div class="quantity">Quantity: <span class="value">{{orderItem.itemCount}}</span></div>
       <div class="tag tag-success" v-if="false">Delivered</div>
       <div class="tag tag-progress" v-else>En-route</div>
       <br />
@@ -34,13 +34,27 @@ import { Vue, Component, Prop } from "nuxt-property-decorator";
 
 @Component
 export default class OrderItem extends Vue {
+  @Prop()
+  orderItem: any;
+
+  
+  get displayPhoto() {
+    return (
+      //@ts-ignore
+      process.env.API_URL.replace(/\/+$/, "") +
+      "/product-items/display-photo/" +
+      this.orderItem.imageUrl.replace(/^\/+/, "")
+    );
+  }
+
+
   goToPage(path: string) {
     if (this.$nuxt.$route.fullPath == path) return;
 
     this.$nuxt.$router.push(path);
   }
   goToTrackOrderPage() {
-    this.goToPage(`/account/orders/track-order/asdfasdf`)
+    this.goToPage(`/account/orders/track-order/${this.orderItem.id}`)
   }
 }
 </script>

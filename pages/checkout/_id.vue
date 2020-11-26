@@ -66,7 +66,7 @@
           :key="cartItem.id"
         >
           <div class="image-container">
-            <div class="image"></div>
+            <div class="image" :style="{backgroundImage: 'url(\''+ displayPhotoBase + cartItem.productItem.imageUrl.replace(/^\/+/, '') +'\')'}"></div>
           </div>
           <div class="content">
             <div class="name">{{ cartItem.productItem.name }}</div>
@@ -104,11 +104,19 @@
       <div class="light-card-container">
         <light-card
           v-if="addresses.length > 0 && featuredAddress"
-          @icon-clicked="addressForEdit = featuredAddress; showAddressModal = true"
+          @icon-clicked="
+            addressForEdit = featuredAddress;
+            showAddressModal = true;
+          "
         >
           <template v-slot:header-text>{{ featuredAddress.title }}</template>
           <template v-slot:icon><i class="fas fa-pencil-alt"></i></template>
-          <template v-slot:body-header-text><span v-if="featuredAddress.isDefault">Default Shipping Address</span> ( {{featuredAddress.title}} )</template>
+          <template v-slot:body-header-text
+            ><span v-if="featuredAddress.isDefault"
+              >Default Shipping Address</span
+            >
+            ( {{ featuredAddress.title }} )</template
+          >
           {{ featuredAddress.addressString }}
 
           <div class="landmarks-container">
@@ -156,7 +164,11 @@
           >
             <i class="fas fa-plus"></i> Add Address
           </button>
-          <button v-if="addresses.length > 0" class="continue-button" @click="checkout">
+          <button
+            v-if="addresses.length > 0"
+            class="continue-button"
+            @click="checkout"
+          >
             Proceed To Payment <i class="fas fa-arrow-right"></i>
           </button>
         </div>
@@ -189,6 +201,7 @@ export default class CheckoutPage extends Vue {
   addressForEdit: object = {};
   createAddress: boolean = false;
   featuredAddressId: string = "";
+  submitting: boolean = false;
 
   async fetch() {
     await this.$store.dispatch("address_store/fetchAllAddresses");
@@ -197,6 +210,13 @@ export default class CheckoutPage extends Vue {
     if (!id) {
       await this.$store.dispatch("cart_store/fetchCartItems");
     }
+  }
+
+  get displayPhotoBase() {
+    return (
+    //@ts-ignore
+      process.env.API_URL.replace(/\/+$/, "") + "/product-items/display-photo/"
+    );
   }
 
   get addresses() {
@@ -254,8 +274,28 @@ export default class CheckoutPage extends Vue {
   }
 
   checkout() {
-    if(!this.featuredAddress) return
+    if (this.submitting) return;
+    if (!this.featuredAddress) return;
 
+    let instance = this.$toast.open({
+      message: "Initiating checkout...",
+      type: "info",
+      duration: 10000,
+      position: "bottom",
+    });
+    this.submitting = true;
+    this.$store
+      .dispatch("order_store/checkout", { address: this.featuredAddress })
+      .catch(() => {
+        this.$toast.open({
+          message: "An error occurred",
+          type: "error",
+          position: "bottom"
+        });
+      }).finally(() => {
+        instance.close();
+        this.submitting = false
+      })
   }
 }
 </script>

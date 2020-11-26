@@ -29,10 +29,27 @@
         padding: 1rem;
         padding-right: 0;
         gap: 0.5rem;
+        &.contains-1 {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+        }
+        &.contains-2 {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
+        }
+        &.contains-3 {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            .image:first-child {
+                grid-row: 1/span 2;
+            }
+        }
         .image {
             background-image: url('/images/product-wine-example.png');
             background-size: cover;
             background-position: center center;
+            height: 100%;
+            width: 100%;
         }
     }
     .content {

@@ -1,9 +1,9 @@
 export default {
     fetchOnServer: false,
-    server: {
-        host: '0.0.0.0',
-        port: '4000'
-    },
+    // server: {
+    //     host: '0.0.0.0',
+    //     port: '4000'
+    // },
     // Global page headers (https://go.nuxtjs.dev/config-head)
     env: {
         API_URL: process.env.API_URL
@@ -31,6 +31,7 @@ export default {
     // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
     plugins: [
         '~/plugins/format-price.js',
+        '~/plugins/date_formatters.js',
         '~/plugins/axios-accessor.ts',
         '~/plugins/vue-toast-notification.js',
         '~/plugins/offline-cart.client.js',

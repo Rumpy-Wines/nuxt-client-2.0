@@ -23,7 +23,7 @@
       </div>
       <div class="price">NGN {{ $formatPrice(product.pricePerItem) }}</div>
       <div class="action-button-container">
-        <button class="button buy-now">Buy Now</button>
+        <button class="button buy-now" v-if="false">Buy Now</button>
         <button class="button add-to-cart" @click="addToCart()">
           Add To Cart
         </button>

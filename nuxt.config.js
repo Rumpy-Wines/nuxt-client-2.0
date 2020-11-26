@@ -6,7 +6,7 @@ export default {
     // },
     // Global page headers (https://go.nuxtjs.dev/config-head)
     env: {
-        API_URL: process.env.API_URL
+        API_URL: process.env.API_URL || 'http://localhost:8000'
     },
     head: {
         title: 'rumpy',

@@ -66,7 +66,7 @@
           :key="cartItem.id"
         >
           <div class="image-container">
-            <div class="image" :style="{backgroundImage: 'url(\''+ displayPhotoBase + cartItem.productItem.imageUrl.replace(/^\/+/, '') +'\')'}"></div>
+            <div class="image" :style="{backgroundImage: `url(${cartItem.productItem.imageUrl})`}"></div>
           </div>
           <div class="content">
             <div class="name">{{ cartItem.productItem.name }}</div>
@@ -210,13 +210,6 @@ export default class CheckoutPage extends Vue {
     if (!id) {
       await this.$store.dispatch("cart_store/fetchCartItems");
     }
-  }
-
-  get displayPhotoBase() {
-    return (
-    //@ts-ignore
-      process.env.API_URL.replace(/\/+$/, "") + "/product-items/display-photo/"
-    );
   }
 
   get addresses() {

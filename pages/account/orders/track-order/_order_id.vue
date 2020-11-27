@@ -38,7 +38,7 @@
       <div class="divider"></div>
       <div class="item-details">
         <div class="image-container">
-          <div class="image" :style="{ backgroundImage: `url(${displayPhoto})` }"></div>
+          <div class="image" :style="{ backgroundImage: `url(${orderItem.imageUrl})` }"></div>
         </div>
         <div class="content">
           <div class="name">{{orderItem.name}}</div>
@@ -103,14 +103,6 @@ export default class TrackSingleOrderPage extends Vue {
     await this.$store.dispatch("order_store/fetchOrderItem", { id });
   }
 
-  get displayPhoto() {
-    return (
-      //@ts-ignore
-      process.env.API_URL.replace(/\/+$/, "") +
-      "/product-items/display-photo/" +
-      this.orderItem.imageUrl.replace(/^\/+/, "")
-    );
-  }
 
   get orderItem(): any {
     let id = this.$nuxt.$route.params.order_id;

@@ -22,7 +22,7 @@
         <div class="right">
           <div
             class="image"
-            :style="{ backgroundImage: `url('${displayPhoto}')` }"
+            :style="{ backgroundImage: `url('${product.imageUrl}')` }"
           ></div>
         </div>
         <div class="left">
@@ -196,16 +196,6 @@ export default class SingleProductPage extends Vue {
         instance.close();
       }, 1000)
     })
-  }
-
-  get displayPhoto() {
-    return (
-    //@ts-ignore
-      process.env.API_URL.replace(/\/+$/, "") +
-      "/product-items/display-photo/" +
-      //@ts-ignore
-      this.product.imageUrl.replace(/^\/+/, "")
-    );
   }
 
   goToPage(path: string) {

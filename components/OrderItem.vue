@@ -1,7 +1,7 @@
 <template>
   <div class="order-item">
     <div class="image-container">
-      <div class="image" :style="{ backgroundImage: `url('${displayPhoto}')` }"></div>
+      <div class="image" :style="{ backgroundImage: `url('${orderItem.imageUrl}')` }"></div>
     </div>
     <div class="content">
       <div class="name">{{orderItem.name}}</div>
@@ -36,17 +36,6 @@ import { Vue, Component, Prop } from "nuxt-property-decorator";
 export default class OrderItem extends Vue {
   @Prop()
   orderItem: any;
-
-  
-  get displayPhoto() {
-    return (
-      //@ts-ignore
-      process.env.API_URL.replace(/\/+$/, "") +
-      "/product-items/display-photo/" +
-      this.orderItem.imageUrl.replace(/^\/+/, "")
-    );
-  }
-
 
   goToPage(path: string) {
     if (this.$nuxt.$route.fullPath == path) return;

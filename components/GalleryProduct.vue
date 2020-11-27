@@ -2,7 +2,7 @@
   <div class="gallery-product">
     <div
       class="image"
-      :style="{ backgroundImage: `url(${displayPhoto})` }"
+      :style="{ backgroundImage: `url(${product.imageUrl})` }"
       @click="goToPage(`/products/${product.id}`)"
     ></div>
     <div class="text">
@@ -48,16 +48,6 @@ export default class GalleryProduct extends Vue {
 
     this.$nuxt.$router.push(path);
   }
-
-  get displayPhoto() {
-    return (
-      //@ts-ignore
-      process.env.API_URL.replace(/\/+$/, "") +
-      "/product-items/display-photo/" +
-      this.product.imageUrl.replace(/^\/+/, "")
-    );
-  }
-
   addToCart() {
     let instance : ToastComponent = this.$toast.open({
         message: "Adding item to cart...",

@@ -3,7 +3,7 @@
     <div class="image-container">
       <div
         class="image"
-        :style="{ backgroundImage: `url('${displayPhoto}')` }"
+        :style="{ backgroundImage: `url('${product.imageUrl}')` }"
       ></div>
     </div>
     <div class="content">
@@ -85,16 +85,6 @@ export default class CartItem extends Vue {
   get product() {
     return this.cartItem.productItem;
   }
-
-  get displayPhoto() {
-    return (
-      //@ts-ignore
-      process.env.API_URL.replace(/\/+$/, "") +
-      "/product-items/display-photo/" +
-      this.product.imageUrl.replace(/^\/+/, "")
-    );
-  }
-
   quantityChanged() {
     let value = parseInt((event?.target as HTMLSelectElement).value);
     let cartItemClone = _.cloneDeep(this.cartItem);

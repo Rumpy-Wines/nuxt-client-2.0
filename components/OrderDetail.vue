@@ -1,7 +1,7 @@
 <template>
   <div class="order-detail">
     <div class="images-container" :class="imageClass">
-      <div class="image" :style="{backgroundImage: 'url(\''+ displayPhotoBase + item.imageUrl.replace(/^\/+/, '') +'\')'}" v-for="item in items.slice(0, 4)" :key="item.id"></div>
+      <div class="image" :style="{backgroundImage: `url(${item.imageUrl})`}" v-for="item in items.slice(0, 4)" :key="item.id"></div>
     </div>
     <div class="content">
       <div class="price">NGN {{ $formatPrice(order.price) }}</div>
@@ -31,12 +31,8 @@ import { Vue, Component, Prop } from "nuxt-property-decorator";
 export default class OrderDetail extends Vue {
   @Prop()
   order: any;
-  get displayPhotoBase() {
-    return (
-    //@ts-ignore
-      process.env.API_URL.replace(/\/+$/, "") + "/product-items/display-photo/"
-    );
-  }
+
+
   goToPage(path: string) {
     event?.preventDefault();
     if (this.$nuxt.$route.fullPath == path) return;

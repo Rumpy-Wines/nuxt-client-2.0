@@ -105,6 +105,7 @@ import _ from "lodash";
 @Component({
   components: { LightCard, CreateEditAddressModal },
   layout: "account",
+  fetchOnServer: false
 })
 export default class AddressBook extends Vue {
   showCreateEditAddressModal: boolean = false;

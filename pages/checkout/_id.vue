@@ -188,6 +188,7 @@ import { AddressStoreState } from "~/store/address_store";
 @Component({
   middleware: ["authenticated"],
   components: { LightCard, EditProfileDetailsModal, CreateEditAddressModal },
+  fetchOnServer: false
 })
 export default class CheckoutPage extends Vue {
   activeIndex: number = 0;

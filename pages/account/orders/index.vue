@@ -27,6 +27,7 @@ import {OrderStoreState } from "~/store/order_store";
 @Component({
   components: { OrderDetail },
   layout: "account",
+  fetchOnServer: false
 })
 export default class OrdersPage extends Vue {
   async fetch() {

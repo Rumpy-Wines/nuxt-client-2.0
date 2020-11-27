@@ -50,6 +50,7 @@ import CartItem from "~/components/CartItem.vue";
 import { CartStoreState } from "~/store/cart_store";
 
 @Component({
+  fetchOnServer: false,
   components: {
     CartItem,
   },

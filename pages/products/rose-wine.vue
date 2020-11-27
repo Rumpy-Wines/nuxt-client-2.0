@@ -20,6 +20,7 @@ import GalleryProduct from "~/components/GalleryProduct.vue";
 import { ProductItemState } from "~/store/product_item_store";
 
 @Component({
+  fetchOnServer: false,
   components: {
     ProductsMiniNavbar,
     GalleryProduct,

@@ -44,6 +44,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component({
   layout: "account",
+  fetchOnServer: false
 })
 export default class ChangePasswordPage extends Vue {
   goToPage(path: string) {

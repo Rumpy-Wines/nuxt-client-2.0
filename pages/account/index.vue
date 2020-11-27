@@ -61,6 +61,7 @@ import { AddressStoreState } from "~/store/address_store";
 @Component({
   components: { LightCard, EditProfileDetailsModal },
   layout: "account",
+  fetchOnServer: false
 })
 export default class Account extends Vue {
   showEditProfileDetialsModal: boolean = false;

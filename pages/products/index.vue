@@ -35,10 +35,11 @@ import {ProductItemState} from "~/store/product_item_store";
     ProductsMiniNavbar,
     GalleryProduct,
   },
+  fetchOnServer: false
 })
 export default class ProductsPage extends Vue {
   async fetch() {
-    await this.$store.dispatch("product_item_store/fetchProductItems", {});
+    await this.$store.dispatch("product_item_store/fetchProductItems", {})
   }
 
   get productItemState() : ProductItemState{

@@ -82,6 +82,7 @@ import { OrderStoreState } from "~/store/order_store";
 
 @Component({
   layout: "account",
+  fetchOnServer: false
 })
 export default class TrackSingleOrderPage extends Vue {
   copyID() {

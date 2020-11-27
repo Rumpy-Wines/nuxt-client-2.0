@@ -60,6 +60,7 @@ import { OrderStoreState } from "~/store/order_store";
     OrderItem,
   },
   layout: "account",
+  fetchOnServer: false
 })
 export default class SingleOrderPage extends Vue {
   async fetch() {

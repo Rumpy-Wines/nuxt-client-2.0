@@ -146,6 +146,7 @@ import { ToastComponent } from "vue-toast-notification";
     Review,
     GalleryProduct,
   },
+    fetchOnServer: false
 })
 export default class SingleProductPage extends Vue {
   get id() {

@@ -1,5 +1,6 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
 import { RootState } from '~/store';
+// import devalue from
 
 export const state = () => ({
 	paginationData: { content: [] },
@@ -66,7 +67,8 @@ export const actions: ActionTree<ProductItemState, RootState> = {
 	fetchProductItems({ commit }, { page }) {
 		let qpage: number = page || 0
 		return new Promise((resolve, reject) => {
-			this.$axios.$get(`/product-items?page=${qpage}`)
+			this.$axios.get(`/product-items?page=${qpage}`)
+			.then(response => response.data)
 				.then(paginationData => {
 					commit("FETCH_PRODUCT_ITEMS", { paginationData })
 					resolve()

@@ -25,6 +25,7 @@ import { ProductItemState } from "~/store/product_item_store";
     ProductsMiniNavbar,
     GalleryProduct,
   },
+  fetchOnServer: false
 })
 export default class SparklingWinePage extends Vue {
 	pageCategory: string = "SPARKLING";

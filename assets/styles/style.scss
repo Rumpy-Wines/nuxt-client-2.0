@@ -121,9 +121,14 @@ select {
     .questions .question,
     .responses .response {
         margin-bottom: 0.3rem;
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .responses {
         color: rgba($dark, 0.67);
+        overflow: hidden;
     }
 }
 

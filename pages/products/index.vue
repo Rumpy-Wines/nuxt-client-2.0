@@ -15,11 +15,15 @@
         :key="i"
       ></div>
     </section>
-	<section class="products-showcase-section" v-else-if="$fetchState.error">
+    <section class="products-showcase-section" v-else-if="$fetchState.error">
       <h1>Error While loading!!!</h1>
     </section>
     <section class="products-showcase-section" v-else>
-      <GalleryProduct v-for="product in products" :key="product.id" :product="product" />
+      <GalleryProduct
+        v-for="product in products"
+        :key="product.id"
+        :product="product"
+      />
     </section>
   </div>
 </template>
@@ -28,30 +32,27 @@
 import { Vue, Component, Prop } from "nuxt-property-decorator";
 import ProductsMiniNavbar from "~/components/ProductsMiniNavbar.vue";
 import GalleryProduct from "~/components/GalleryProduct.vue";
-import {ProductItemState} from "~/store/product_item_store";
+import { ProductItemState } from "~/store/product_item_store";
 
 @Component({
   components: {
     ProductsMiniNavbar,
-    GalleryProduct,
+    GalleryProduct
   },
   fetchOnServer: false
 })
 export default class ProductsPage extends Vue {
   async fetch() {
-    await this.$store.dispatch("product_item_store/fetchProductItems", {})
+    await this.$store.dispatch("product_item_store/fetchProductItems", {});
   }
 
-  get productItemState() : ProductItemState{
-	  return this.$store.state.product_item_store as ProductItemState
+  get productItemState(): ProductItemState {
+    return this.$store.state.product_item_store as ProductItemState;
   }
 
   get products() {
-	  return this.productItemState.paginationData.content
+    return this.productItemState.paginationData.content;
   }
-
-  
-
 }
 </script>
 

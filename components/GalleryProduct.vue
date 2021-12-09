@@ -24,6 +24,9 @@
       <div class="price">NGN {{ $formatPrice(product.pricePerItem) }}</div>
       <div class="action-button-container">
         <button class="button buy-now" v-if="false">Buy Now</button>
+        <nuxt-link :to="`/products/${product.id}`" class="button view-item">
+          View Item
+        </nuxt-link>
         <button class="button add-to-cart" @click="addToCart()">
           Add To Cart
         </button>
@@ -49,28 +52,29 @@ export default class GalleryProduct extends Vue {
     this.$nuxt.$router.push(path);
   }
   addToCart() {
-    let instance : ToastComponent = this.$toast.open({
-        message: "Adding item to cart...",
-        type: "info",
-        duration: 10000,
-        position: "bottom",
-        // all of other options may go here
+    let instance: ToastComponent = this.$toast.open({
+      message: "Adding item to cart...",
+      type: "info",
+      duration: 10000,
+      position: "bottom"
+      // all of other options may go here
+    });
+    this.$store
+      .dispatch("cart_store/addToCart", { productItem: this.product })
+      .then(() => {
+        this.$toast.open({
+          message: "Item added to cart",
+          type: "success",
+          duration: 2000,
+          position: "bottom"
+          // all of other options may go here
+        });
+      })
+      .finally(() => {
+        setTimeout(() => {
+          instance.close();
+        }, 1000);
       });
-    this.$store.dispatch("cart_store/addToCart", {productItem: this.product})
-    .then(() => {
-      this.$toast.open({
-        message: "Item added to cart",
-        type: "success",
-        duration: 2000,
-        position: "bottom",
-        // all of other options may go here
-      });
-    })
-    .finally(() => {
-      setTimeout(()=> {
-        instance.close();
-      }, 1000)
-    })
   }
 }
 </script>
